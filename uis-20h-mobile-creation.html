@@ -106,6 +106,29 @@ table.schema-table code { font-family: monospace; background: #f1f5f9; padding: 
 .mobile-btn-success { background: #10b981; color: #fff; }
 .progress-bar { height: 4px; background: #e2e8f0; border-radius: 2px; margin-bottom: 16px; }
 .progress-fill { height: 100%; background: #3b82f6; border-radius: 2px; }
+.pill-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-right: 4px; margin-bottom: 4px; }
+.pill-green { background: #dcfce7; color: #166534; }
+.pill-add { background: #f1f5f9; color: #3b82f6; cursor: pointer; border: 1px dashed #cbd5e1; }
+.bottom-sheet { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px 16px 0 0; padding: 16px; margin-top: 12px; }
+.bottom-sheet-handle { width: 40px; height: 4px; background: #cbd5e1; border-radius: 2px; margin: 0 auto 12px; }
+.summary-section { border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+.summary-section-title { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.summary-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
+.summary-label { color: #64748b; }
+.summary-value { color: #0f172a; font-weight: 600; }
+.signer-card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.signer-avatar { width: 36px; height: 36px; border-radius: 50%; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #3b82f6; flex-shrink: 0; }
+.signer-info { flex: 1; }
+.signer-name { font-size: 13px; font-weight: 600; color: #0f172a; }
+.signer-detail { font-size: 11px; color: #64748b; }
+.signer-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+.signer-required { background: #fee2e2; color: #dc2626; }
+.signer-optional { background: #f1f5f9; color: #64748b; }
+.toggle-track { width: 40px; height: 22px; border-radius: 11px; background: #3b82f6; position: relative; display: inline-block; vertical-align: middle; }
+.toggle-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; position: absolute; top: 2px; right: 2px; }
+.gap-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 6px; }
+.gap-new { background: #dbeafe; color: #1d4ed8; }
+.gap-enhanced { background: #fef3c7; color: #92400e; }
 </style>
 </head>
 <body>
@@ -120,10 +143,11 @@ table.schema-table code { font-family: monospace; background: #f1f5f9; padding: 
             <span class="uis-badge badge-child">Child of UIS-20</span>
         </div>
         <h1 class="uis-h1">Mobile Work Order Creation</h1>
-        <p class="uis-sub">6-step mobile form enabling field workers to create complete T&amp;M work orders on-site — labor, materials, equipment, photos, and signatures — from their phones.</p>
+        <p class="uis-sub">5-step mobile wizard + Summary page + Prepare Signatures flow enabling field workers to create complete T&amp;M work orders on-site &mdash; project selection, rich descriptions, multi-date tracking, labor with premium hours, materials, equipment, other items, photos &amp; documents, PDF preview, and managed signature collection &mdash; all from their phones.</p>
         <div class="uis-meta">
             <span><strong>Author:</strong> Appello Product</span>
             <span><strong>Created:</strong> 2026-03-30</span>
+            <span><strong>Revised:</strong> 2026-03-30</span>
             <span><strong>Parent:</strong> UIS-20</span>
         </div>
     </div>
@@ -142,25 +166,27 @@ table.schema-table code { font-family: monospace; background: #f1f5f9; padding: 
         </ol>
     </div>
 
-    <!-- Section 1 -->
+    <!-- ================================================================ -->
+    <!-- Section 1: Business Case                                         -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="business-case">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">1. Business Case <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">1. Business Case <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
-            <p>Field workers need to create T&amp;M work orders <strong>on-site, from their phones</strong>, at the end of a shift or when extra work is performed. This is the single most critical mobile feature for T&amp;M workflow adoption. Without it, field data capture falls back to paper forms and WhatsApp photos — the exact problem Appello is solving.</p>
-            <p style="margin-top:10px;">Every customer interviewed uses some form of mobile field entry today — whether it's Clearstory's app, a custom form library, or paper. Appello must provide a native, purpose-built mobile WO creation experience.</p>
+            <p>Field workers need to create T&amp;M work orders <strong>on-site, from their phones</strong>, at the end of a shift or when extra work is performed. This is the single most critical mobile feature for T&amp;M workflow adoption. Without it, field data capture falls back to paper forms and WhatsApp photos &mdash; the exact problem Appello is solving.</p>
+            <p style="margin-top:10px;">A gap analysis against Clearstory revealed <strong>24 feature gaps</strong> in the original 6-step wizard design. This revised spec restructures the flow into a 5-step wizard + Summary page + separate Prepare Signatures flow, achieving full feature parity with Clearstory while preserving Appello&rsquo;s mobile-first design language.</p>
 
             <h3>Customer Evidence</h3>
             <div class="customer-quote">
                 "The work order has been submitted from the field. They go into the form library, grab the work order template, answer the questions, and submit. It's clunky but it works."
-                <span class="attribution">— Tear Systems</span>
+                <span class="attribution">&mdash; Tear Systems</span>
             </div>
             <div class="customer-quote">
                 "Our supervisors use the form library as a workaround. They fill out the T&amp;M form with a supervisor PIN for sign-off. We need a proper work order flow."
-                <span class="attribution">— Pedersen Corp</span>
+                <span class="attribution">&mdash; Pedersen Corp</span>
             </div>
             <div class="customer-quote">
                 "T&amp;M form accessible via mobile app for field workers to fill out at end of shift. That's the core requirement."
-                <span class="attribution">— AB Insulation</span>
+                <span class="attribution">&mdash; AB Insulation</span>
             </div>
 
             <h3>Competitive Landscape</h3>
@@ -168,7 +194,7 @@ table.schema-table code { font-family: monospace; background: #f1f5f9; padding: 
                 <div class="competitor-card">
                     <span class="comp-status comp-has">HAS THIS</span>
                     <strong>Clearstory</strong>
-                    <span>Full mobile T&amp;M entry with trade-level pickers, photo capture, and electronic signatures.</span>
+                    <span>Full mobile T&amp;M entry with project picker, rich text, multi-date, 5 hour columns, photo/doc upload (50 limit), signer management with signing order, PDF preview, and electronic signature collection.</span>
                 </div>
                 <div class="competitor-card">
                     <span class="comp-status comp-has">HAS THIS</span>
@@ -180,368 +206,989 @@ table.schema-table code { font-family: monospace; background: #f1f5f9; padding: 
             <h3>Value Proposition</h3>
             <div class="value-cards">
                 <div class="value-card">
-                    <div class="v-icon">📱</div>
+                    <div class="v-icon">&#128241;</div>
                     <div class="v-title">On-Site Capture</div>
-                    <div class="v-detail">Field workers create WOs from their phone — no more paper forms or WhatsApp photos.</div>
+                    <div class="v-detail">Field workers create WOs from their phone &mdash; no more paper forms or WhatsApp photos.</div>
                 </div>
                 <div class="value-card">
-                    <div class="v-icon">✍️</div>
-                    <div class="v-title">Electronic Signatures</div>
-                    <div class="v-detail">Touch-based signature capture for worker and optional customer sign-off.</div>
+                    <div class="v-icon">&#9997;&#65039;</div>
+                    <div class="v-title">Managed Signatures</div>
+                    <div class="v-detail">Add required/optional signers, set signing order, email notifications, and collect signatures digitally.</div>
                 </div>
                 <div class="value-card">
-                    <div class="v-icon">📷</div>
-                    <div class="v-title">Photo Documentation</div>
-                    <div class="v-detail">Camera-based photo capture attached directly to the work order record.</div>
+                    <div class="v-icon">&#128247;</div>
+                    <div class="v-title">Photos &amp; Documents</div>
+                    <div class="v-detail">Attach up to 50 photos and documents (JPEG, PNG, PDF) directly from camera, photo library, or files.</div>
                 </div>
                 <div class="value-card">
-                    <div class="v-icon">💾</div>
-                    <div class="v-title">Draft Management</div>
-                    <div class="v-detail">Save multiple concurrent drafts — start a WO, finish it later.</div>
+                    <div class="v-icon">&#128196;</div>
+                    <div class="v-title">PDF Preview</div>
+                    <div class="v-detail">Preview the final T&amp;M tag as a formatted PDF before submitting for signatures.</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Section 2 -->
+    <!-- ================================================================ -->
+    <!-- Section 2: Scope                                                 -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="scope">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">2. Scope <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">2. Scope <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
             <h3>In Scope</h3>
             <ul>
-                <li><span class="scope-tag scope-in">IN</span> 6-step mobile form: Date/Info, Labor, Materials, Equipment, Photos, Signatures</li>
-                <li><span class="scope-tag scope-in">IN</span> <code>SelectionSlideup</code> pickers for TradeLevel, Material, and Equipment selection</li>
-                <li><span class="scope-tag scope-in">IN</span> Camera-based photo capture (up to 5 photos per WO)</li>
-                <li><span class="scope-tag scope-in">IN</span> Touch-based signature canvas for worker and optional customer signatures</li>
-                <li><span class="scope-tag scope-in">IN</span> Draft management — save and resume multiple concurrent drafts</li>
+                <li><span class="scope-tag scope-in">IN</span> 5-step wizard + Summary page + Prepare Signatures sub-flow: Info, Labor, Material, Equipment, Summary &rarr; Prepare Signatures</li>
+                <li><span class="scope-tag scope-in">IN</span> Project/Job title picker with inline project creation and full-screen search</li>
+                <li><span class="scope-tag scope-in">IN</span> Cost code field (optional text input)</li>
+                <li><span class="scope-tag scope-in">IN</span> T&amp;M Tag Title field (maps to <code>Job.name</code>)</li>
+                <li><span class="scope-tag scope-in">IN</span> Rich text description editor (full-screen with Bold, Italic, Underline, Lists, Indent, Clear Formatting, DONE button)</li>
+                <li><span class="scope-tag scope-in">IN</span> Multi-date &ldquo;Dates of Work Performed&rdquo; (green pill chips with + to add, &times; to remove)</li>
+                <li><span class="scope-tag scope-in">IN</span> Photos &amp; Documents section on Step 1 (0/50 limit, separate Photo/Document subsections, Camera/Photo Library/Files sources, JPEG/PNG/PDF support)</li>
+                <li><span class="scope-tag scope-in">IN</span> EXIT/SAVE header pattern (replaces back arrow + step counter)</li>
+                <li><span class="scope-tag scope-in">IN</span> Labor: &ldquo;Qty of Workers&rdquo; multiplier column</li>
+                <li><span class="scope-tag scope-in">IN</span> Labor: 5 hour columns &mdash; ST, OT, DT, Premium Time, Premium OT (horizontal scroll)</li>
+                <li><span class="scope-tag scope-in">IN</span> Labor: per-row Date of Work picker for each labor entry</li>
+                <li><span class="scope-tag scope-in">IN</span> Labor: &ldquo;Add Worker&rdquo; from imported rates sub-screen with empty state</li>
+                <li><span class="scope-tag scope-in">IN</span> Material &amp; Equipment: 3-way add bottom sheet (&ldquo;Select from Catalog&rdquo;, &ldquo;Add Blank Row&rdquo;, &ldquo;Bulk Edit&rdquo; Phase 2)</li>
+                <li><span class="scope-tag scope-in">IN</span> Material &amp; Equipment: import rate sub-screens with empty states</li>
+                <li><span class="scope-tag scope-in">IN</span> Full-width Previous Step / Next Step navigation buttons on all steps</li>
+                <li><span class="scope-tag scope-in">IN</span> Summary page (Step 5): full read-only recap of all entered data</li>
+                <li><span class="scope-tag scope-in">IN</span> &ldquo;Other&rdquo; line-item category (4th type: Name, Qty, UoM, Qty of Unit)</li>
+                <li><span class="scope-tag scope-in">IN</span> &ldquo;Preview Tag&rdquo; button with in-app PDF preview</li>
+                <li><span class="scope-tag scope-in">IN</span> &ldquo;Prepare Signatures&rdquo; as separate flow accessed from Summary</li>
+                <li><span class="scope-tag scope-in">IN</span> Signer management: add/select signers, Required/Optional types, search existing or create new (First Name, Last Name, Email, Company, Signer Type)</li>
+                <li><span class="scope-tag scope-in">IN</span> Signing order toggle</li>
+                <li><span class="scope-tag scope-in">IN</span> Email message to signers (collapsible textarea)</li>
+                <li><span class="scope-tag scope-in">IN</span> &ldquo;Send signed copy to&rdquo; distribution list</li>
+                <li><span class="scope-tag scope-in">IN</span> &ldquo;Collect Signatures&rdquo; button (distinct from Submit)</li>
+                <li><span class="scope-tag scope-in">IN</span> Draft management &mdash; save and resume multiple concurrent drafts</li>
                 <li><span class="scope-tag scope-in">IN</span> Auto-pricing based on selected trade levels and hour types</li>
-                <li><span class="scope-tag scope-in">IN</span> Supervisor notification on WO submission</li>
             </ul>
 
             <h3>Out of Scope</h3>
             <ul>
                 <li><span class="scope-tag scope-out">OUT</span> Full offline mode with background sync (Phase 2)</li>
+                <li><span class="scope-tag scope-out">OUT</span> Bulk Edit on material/equipment (Phase 2 &mdash; bottom sheet shows option but disabled)</li>
                 <li><span class="scope-tag scope-out">OUT</span> Barcode/QR scanning for materials</li>
                 <li><span class="scope-tag scope-out">OUT</span> Voice-to-text for description fields</li>
+                <li><span class="scope-tag scope-out">OUT</span> Desktop WO creation (covered in UIS-20c)</li>
             </ul>
         </div>
     </div>
 
-    <!-- Section 3 -->
+    <!-- ================================================================ -->
+    <!-- Section 3: UI Concepts                                           -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="ui-concepts">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">3. UI Concepts <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">3. UI Concepts <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
 
-            <h3>Step 1: Date &amp; Info</h3>
+            <!-- ========================= STEP 1 ========================= -->
+            <h3>Step 1: Info (with Photos &amp; Documents)</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Replaces the old "Date &amp; Info" step. Now includes Project Picker, Cost Code, T&amp;M Tag Title, Rich Text Description, Multi-Date pills, and Photos &amp; Documents. Header uses EXIT / SAVE pattern.</p>
             <div class="mobile-frame">
                 <div class="mobile-header">
-                    <span style="font-size:18px;">←</span>
-                    Work Order
-                    <span style="flex:1;"></span>
-                    <span style="font-size:12px; opacity:0.7;">Step 1 of 6</span>
+                    <span style="font-size:13px; opacity:0.9;">EXIT</span>
+                    <span style="flex:1; text-align:center;">New T&amp;M Tag</span>
+                    <span style="font-size:13px; opacity:0.9;">SAVE</span>
                 </div>
-                <div class="mobile-body">
+                <div class="mobile-body" style="min-height:620px;">
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width:16.6%;"></div>
+                        <div class="progress-fill" style="width:20%;"></div>
                     </div>
 
-                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Date &amp; Info</div>
+                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Info</div>
 
-                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Date *</div>
-                    <div class="mobile-input">
-                        <span>📅</span>
-                        <span style="margin-left:8px;">March 30, 2026</span>
-                    </div>
-
-                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Customer Reference</div>
-                    <div class="mobile-input">
-                        <span style="color:#94a3b8;">Enter reference number...</span>
-                    </div>
-
-                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Company *</div>
+                    <!-- Project Picker -->
+                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Project / Job *</div>
                     <div class="mobile-input" style="justify-content:space-between;">
-                        <span>Select Company</span>
-                        <span style="color:#0f172a;">›</span>
+                        <span style="color:#0f172a; font-weight:600;">Riverdale Phase 2</span>
+                        <span style="color:#0f172a;">&#8250;</span>
                     </div>
 
+                    <!-- Cost Code -->
+                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Cost Code</div>
+                    <div class="mobile-input">
+                        <span style="color:#94a3b8;">e.g. 26-0100</span>
+                    </div>
+
+                    <!-- T&M Tag Title -->
+                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">T&amp;M Tag Title *</div>
+                    <div class="mobile-input">
+                        <span style="color:#0f172a;">Extra insulation &mdash; 3rd floor east wing</span>
+                    </div>
+
+                    <!-- Rich Text Description -->
                     <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Description</div>
-                    <div class="mobile-input" style="height:80px; align-items:flex-start; padding-top:12px;">
-                        <span style="color:#94a3b8;">Describe the work performed...</span>
+                    <div class="mobile-input" style="height:60px; align-items:flex-start; padding-top:12px; justify-content:space-between;">
+                        <span style="color:#334155; font-size:13px;">Additional insulation work requested by GC for...</span>
+                        <span style="color:#3b82f6; font-size:18px; flex-shrink:0; margin-left:8px;">&#9998;</span>
                     </div>
 
-                    <div style="margin-top:20px;">
-                        <div class="mobile-btn mobile-btn-primary">Next →</div>
+                    <!-- Multi-Date Chips -->
+                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Dates of Work Performed *</div>
+                    <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:12px;">
+                        <span class="pill-chip pill-green">Mar 28 <span style="cursor:pointer; margin-left:2px;">&times;</span></span>
+                        <span class="pill-chip pill-green">Mar 29 <span style="cursor:pointer; margin-left:2px;">&times;</span></span>
+                        <span class="pill-chip pill-green">Mar 30 <span style="cursor:pointer; margin-left:2px;">&times;</span></span>
+                        <span class="pill-chip pill-add">+ Add Date</span>
+                    </div>
+
+                    <!-- Photos & Documents -->
+                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Photos &amp; Documents <span style="font-weight:400; color:#94a3b8;">0 / 50</span></div>
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:12px;">
+                        <div style="font-size:11px; font-weight:600; color:#334155; margin-bottom:8px;">Photos</div>
+                        <div style="display:flex; gap:8px; margin-bottom:12px;">
+                            <div style="width:60px; height:60px; background:#f1f5f9; border:2px dashed #cbd5e1; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                                <span style="font-size:20px; color:#94a3b8;">+</span>
+                            </div>
+                        </div>
+                        <div style="font-size:11px; font-weight:600; color:#334155; margin-bottom:8px;">Documents</div>
+                        <div style="display:flex; gap:8px;">
+                            <div style="width:60px; height:60px; background:#f1f5f9; border:2px dashed #cbd5e1; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                                <span style="font-size:20px; color:#94a3b8;">+</span>
+                            </div>
+                        </div>
+                        <div style="font-size:10px; color:#94a3b8; margin-top:8px;">Camera &bull; Photo Library &bull; Files &ensp;|&ensp; JPEG, PNG, PDF</div>
+                    </div>
+
+                    <!-- Full-width nav -->
+                    <div style="margin-top:16px;">
+                        <div class="mobile-btn mobile-btn-primary">Next Step &rarr;</div>
                     </div>
                 </div>
             </div>
 
-            <h3 style="margin-top:24px;">Step 2: Labor Items</h3>
+            <!-- Project Picker Full-Screen -->
+            <h3 style="margin-top:24px;">Step 1 Sub-Screen: Project Picker</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Full-screen picker opened from the Project/Job field. Includes search and CREATE NEW option at the top.</p>
             <div class="mobile-frame">
                 <div class="mobile-header">
-                    <span style="font-size:18px;">←</span>
-                    Work Order
-                    <span style="flex:1;"></span>
-                    <span style="font-size:12px; opacity:0.7;">Step 2 of 6</span>
+                    <span style="font-size:18px;">&times;</span>
+                    <span style="flex:1; text-align:center;">Select Project / Job</span>
                 </div>
-                <div class="mobile-body">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width:33.2%;"></div>
+                <div class="mobile-body" style="min-height:420px; padding:12px 16px;">
+                    <!-- Search -->
+                    <div class="mobile-input" style="height:44px; margin-bottom:12px;">
+                        <span style="margin-right:8px;">&#128269;</span>
+                        <span style="color:#94a3b8;">Search projects...</span>
                     </div>
 
-                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Labor Items</div>
+                    <!-- Create New -->
+                    <div style="border:1px dashed #3b82f6; border-radius:10px; padding:12px; text-align:center; margin-bottom:12px; cursor:pointer;">
+                        <span style="font-size:14px; font-weight:600; color:#3b82f6;">+ CREATE NEW PROJECT</span>
+                    </div>
+
+                    <!-- Results -->
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px;">
+                        <div style="font-size:14px; font-weight:600; color:#0f172a;">Riverdale Phase 2</div>
+                        <div style="font-size:12px; color:#64748b;">Pedersen Corp &bull; Active</div>
+                    </div>
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px;">
+                        <div style="font-size:14px; font-weight:600; color:#0f172a;">Oakwood Mall Renovation</div>
+                        <div style="font-size:12px; color:#64748b;">ABC Construction &bull; Active</div>
+                    </div>
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px;">
+                        <div style="font-size:14px; font-weight:600; color:#0f172a;">Highland Tower &mdash; Mech.</div>
+                        <div style="font-size:12px; color:#64748b;">Tear Systems &bull; Active</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rich Text Editor Full-Screen -->
+            <h3 style="margin-top:24px;">Step 1 Sub-Screen: Rich Text Editor</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Full-screen editor with formatting toolbar. Opened by tapping the edit icon on the Description field.</p>
+            <div class="mobile-frame">
+                <div class="mobile-header">
+                    <span style="font-size:13px; opacity:0.9;">Cancel</span>
+                    <span style="flex:1; text-align:center;">Description</span>
+                    <span style="font-size:13px; color:#10b981; font-weight:700;">DONE</span>
+                </div>
+                <div class="mobile-body" style="min-height:380px; padding:0;">
+                    <!-- Toolbar -->
+                    <div style="display:flex; gap:2px; padding:8px 12px; border-bottom:1px solid #e2e8f0; background:#f8fafc; flex-wrap:wrap;">
+                        <span style="padding:6px 10px; font-size:13px; font-weight:700; color:#0f172a; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">B</span>
+                        <span style="padding:6px 10px; font-size:13px; font-style:italic; color:#0f172a; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">I</span>
+                        <span style="padding:6px 10px; font-size:13px; text-decoration:underline; color:#0f172a; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">U</span>
+                        <span style="padding:6px 10px; font-size:12px; color:#0f172a; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">1.</span>
+                        <span style="padding:6px 10px; font-size:12px; color:#0f172a; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">&bull;</span>
+                        <span style="padding:6px 10px; font-size:12px; color:#0f172a; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">&#8677;</span>
+                        <span style="padding:6px 10px; font-size:12px; color:#0f172a; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">&#8676;</span>
+                        <span style="padding:6px 10px; font-size:11px; color:#dc2626; background:#fff; border:1px solid #e2e8f0; border-radius:6px;">Clear</span>
+                    </div>
+                    <!-- Editor area -->
+                    <div style="padding:16px; min-height:300px; font-size:14px; color:#334155; line-height:1.7;">
+                        Additional insulation work requested by GC for the east wing, 3rd floor. Scope includes:
+                        <ul style="padding-left:20px; margin-top:8px;">
+                            <li>R-30 batts in exterior wall cavities</li>
+                            <li>Vapor barrier installation</li>
+                            <li>Fire-stop at all penetrations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================= STEP 2 ========================= -->
+            <h3 style="margin-top:24px;">Step 2: Labor</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Enhanced with Qty of Workers multiplier, 5 hour columns (ST, OT, DT, Premium Time, Premium OT) in a horizontally scrollable table, and per-row Date of Work picker. &ldquo;Add Worker&rdquo; opens the imported rates sub-screen.</p>
+            <div class="mobile-frame">
+                <div class="mobile-header">
+                    <span style="font-size:13px; opacity:0.9;">EXIT</span>
+                    <span style="flex:1; text-align:center;">New T&amp;M Tag</span>
+                    <span style="font-size:13px; opacity:0.9;">SAVE</span>
+                </div>
+                <div class="mobile-body" style="min-height:520px;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:40%;"></div>
+                    </div>
+
+                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Labor</div>
 
                     <!-- Labor item card -->
                     <div style="border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:12px;">
-                        <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Trade Level *</div>
-                        <div class="mobile-input" style="height:44px; justify-content:space-between;">
-                            <span style="color:#0f172a; font-weight:600;">Journeyman Insulator</span>
-                            <span style="color:#0f172a;">›</span>
-                        </div>
-
-                        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
-                            <div>
-                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">ST Hours</div>
-                                <div class="mobile-input" style="height:44px; justify-content:center;">
-                                    <span style="color:#0f172a; font-weight:700;">8.0</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">OT Hours</div>
-                                <div class="mobile-input" style="height:44px; justify-content:center;">
-                                    <span style="color:#0f172a; font-weight:700;">2.0</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">DT Hours</div>
-                                <div class="mobile-input" style="height:44px; justify-content:center;">
-                                    <span style="color:#94a3b8;">0.0</span>
+                        <!-- Trade Level + Date -->
+                        <div style="display:flex; gap:8px; margin-bottom:8px;">
+                            <div style="flex:1;">
+                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Trade Level *</div>
+                                <div class="mobile-input" style="height:40px; justify-content:space-between; margin-bottom:0;">
+                                    <span style="color:#0f172a; font-weight:600; font-size:12px;">Journeyman Insulator</span>
+                                    <span style="color:#0f172a;">&#8250;</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div style="display:flex; justify-content:space-between; margin-top:10px; padding-top:10px; border-top:1px solid #f1f5f9; font-size:12px;">
-                            <span style="color:#64748b;">Rate: $65.00/hr</span>
-                            <span style="font-weight:700; color:#0f172a;">Total: $715.00</span>
+                        <!-- Date of Work -->
+                        <div style="margin-bottom:8px;">
+                            <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Date of Work</div>
+                            <div class="mobile-input" style="height:40px; margin-bottom:0;">
+                                <span style="margin-right:6px;">&#128197;</span>
+                                <span style="color:#0f172a; font-size:13px;">Mar 30, 2026</span>
+                            </div>
+                        </div>
+
+                        <!-- Qty of Workers -->
+                        <div style="margin-bottom:8px;">
+                            <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Qty of Workers</div>
+                            <div class="mobile-input" style="height:40px; width:80px; justify-content:center; margin-bottom:0;">
+                                <span style="color:#0f172a; font-weight:700;">3</span>
+                            </div>
+                        </div>
+
+                        <!-- 5 Hour Columns (horizontal scroll) -->
+                        <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Hours <span style="font-weight:400; color:#94a3b8;">(scroll &rarr;)</span></div>
+                        <div style="overflow-x:auto; margin-bottom:8px; -webkit-overflow-scrolling:touch;">
+                            <div style="display:flex; gap:8px; min-width:420px;">
+                                <div style="flex:1; min-width:70px;">
+                                    <div style="font-size:10px; font-weight:600; color:#334155; margin-bottom:4px; text-align:center;">ST</div>
+                                    <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                        <span style="color:#0f172a; font-weight:700;">8.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex:1; min-width:70px;">
+                                    <div style="font-size:10px; font-weight:600; color:#334155; margin-bottom:4px; text-align:center;">OT</div>
+                                    <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                        <span style="color:#0f172a; font-weight:700;">2.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex:1; min-width:70px;">
+                                    <div style="font-size:10px; font-weight:600; color:#334155; margin-bottom:4px; text-align:center;">DT</div>
+                                    <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                        <span style="color:#94a3b8;">0.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex:1; min-width:70px;">
+                                    <div style="font-size:10px; font-weight:600; color:#334155; margin-bottom:4px; text-align:center;">Prem.</div>
+                                    <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                        <span style="color:#94a3b8;">0.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex:1; min-width:70px;">
+                                    <div style="font-size:10px; font-weight:600; color:#334155; margin-bottom:4px; text-align:center;">Prem OT</div>
+                                    <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                        <span style="color:#94a3b8;">0.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid #f1f5f9; font-size:12px;">
+                            <span style="color:#64748b;">Rate: $65.00/hr &times; 3 workers</span>
+                            <span style="font-weight:700; color:#0f172a;">$1,950.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Add Worker -->
+                    <div style="border:1px dashed #e2e8f0; border-radius:10px; padding:14px; text-align:center; margin-bottom:16px;">
+                        <span style="font-size:14px; font-weight:600; color:#3b82f6;">+ Add Worker</span>
+                    </div>
+
+                    <!-- Full-width nav -->
+                    <div style="display:flex; gap:8px;">
+                        <div class="mobile-btn" style="flex:1; background:#f1f5f9; color:#0f172a;">&larr; Previous Step</div>
+                        <div class="mobile-btn mobile-btn-primary" style="flex:1;">Next Step &rarr;</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Worker Sub-Screen -->
+            <h3 style="margin-top:24px;">Step 2 Sub-Screen: Add Worker (Imported Rates)</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Shows available trade-level rates to import. Empty state shown when no rates are configured.</p>
+            <div class="mobile-frame">
+                <div class="mobile-header">
+                    <span style="font-size:18px;">&times;</span>
+                    <span style="flex:1; text-align:center;">Add Worker</span>
+                </div>
+                <div class="mobile-body" style="min-height:350px; padding:12px 16px;">
+                    <div class="mobile-input" style="height:44px; margin-bottom:12px;">
+                        <span style="margin-right:8px;">&#128269;</span>
+                        <span style="color:#94a3b8;">Search trade levels...</span>
+                    </div>
+
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;">
+                        <div>
+                            <div style="font-size:14px; font-weight:600; color:#0f172a;">Journeyman Insulator</div>
+                            <div style="font-size:12px; color:#64748b;">ST $65.00 &bull; OT $97.50 &bull; DT $130.00</div>
+                        </div>
+                        <span style="font-size:18px; color:#3b82f6;">+</span>
+                    </div>
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;">
+                        <div>
+                            <div style="font-size:14px; font-weight:600; color:#0f172a;">Apprentice Insulator</div>
+                            <div style="font-size:12px; color:#64748b;">ST $42.00 &bull; OT $63.00 &bull; DT $84.00</div>
+                        </div>
+                        <span style="font-size:18px; color:#3b82f6;">+</span>
+                    </div>
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;">
+                        <div>
+                            <div style="font-size:14px; font-weight:600; color:#0f172a;">Foreman</div>
+                            <div style="font-size:12px; color:#64748b;">ST $78.00 &bull; OT $117.00 &bull; DT $156.00</div>
+                        </div>
+                        <span style="font-size:18px; color:#3b82f6;">+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================= STEP 3 ========================= -->
+            <h3 style="margin-top:24px;">Step 3: Material</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Material line items with 3-way add bottom sheet. Users can select from catalog, add a blank row, or bulk edit (Phase 2).</p>
+            <div class="mobile-frame">
+                <div class="mobile-header">
+                    <span style="font-size:13px; opacity:0.9;">EXIT</span>
+                    <span style="flex:1; text-align:center;">New T&amp;M Tag</span>
+                    <span style="font-size:13px; opacity:0.9;">SAVE</span>
+                </div>
+                <div class="mobile-body" style="min-height:480px;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:60%;"></div>
+                    </div>
+
+                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Material</div>
+
+                    <!-- Material item card -->
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:12px;">
+                        <div style="font-size:13px; font-weight:600; color:#0f172a; margin-bottom:6px;">R-30 Fiberglass Batts</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
+                            <div>
+                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Qty</div>
+                                <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                    <span style="color:#0f172a; font-weight:700;">24</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Unit Price</div>
+                                <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                    <span style="color:#0f172a; font-weight:700;">$18.50</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; font-size:12px;">
+                            <span style="font-weight:700; color:#0f172a;">Total: $444.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Add Material trigger -->
+                    <div style="border:1px dashed #e2e8f0; border-radius:10px; padding:14px; text-align:center; margin-bottom:16px;">
+                        <span style="font-size:14px; font-weight:600; color:#3b82f6;">+ Add Material</span>
+                    </div>
+
+                    <!-- 3-Way Bottom Sheet (shown inline for mockup) -->
+                    <div class="bottom-sheet">
+                        <div class="bottom-sheet-handle"></div>
+                        <div style="font-size:14px; font-weight:700; color:#0f172a; margin-bottom:12px;">Add Material</div>
+                        <div style="border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:8px; cursor:pointer;">
+                            <div style="font-size:14px; font-weight:600; color:#0f172a;">&#128218; Select from Catalog</div>
+                            <div style="font-size:12px; color:#64748b;">Choose from your imported material rates</div>
+                        </div>
+                        <div style="border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:8px; cursor:pointer;">
+                            <div style="font-size:14px; font-weight:600; color:#0f172a;">&#10133; Add Blank Row</div>
+                            <div style="font-size:12px; color:#64748b;">Enter material details manually</div>
+                        </div>
+                        <div style="border:1px solid #e2e8f0; border-radius:10px; padding:14px; opacity:0.5;">
+                            <div style="font-size:14px; font-weight:600; color:#0f172a;">&#9998; Bulk Edit <span style="font-size:10px; font-weight:700; color:#94a3b8; background:#f1f5f9; padding:2px 6px; border-radius:4px; margin-left:4px;">PHASE 2</span></div>
+                            <div style="font-size:12px; color:#64748b;">Edit multiple items at once</div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:8px; margin-top:16px;">
+                        <div class="mobile-btn" style="flex:1; background:#f1f5f9; color:#0f172a;">&larr; Previous Step</div>
+                        <div class="mobile-btn mobile-btn-primary" style="flex:1;">Next Step &rarr;</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================= STEP 4 ========================= -->
+            <h3 style="margin-top:24px;">Step 4: Equipment</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Same pattern as Material. Includes 3-way add bottom sheet and import rate sub-screen.</p>
+            <div class="mobile-frame">
+                <div class="mobile-header">
+                    <span style="font-size:13px; opacity:0.9;">EXIT</span>
+                    <span style="flex:1; text-align:center;">New T&amp;M Tag</span>
+                    <span style="font-size:13px; opacity:0.9;">SAVE</span>
+                </div>
+                <div class="mobile-body" style="min-height:420px;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:80%;"></div>
+                    </div>
+
+                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Equipment</div>
+
+                    <!-- Equipment item card -->
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:12px;">
+                        <div style="font-size:13px; font-weight:600; color:#0f172a; margin-bottom:6px;">Scissor Lift &mdash; 26ft</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
+                            <div>
+                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Qty</div>
+                                <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                    <span style="color:#0f172a; font-weight:700;">1</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px;">Daily Rate</div>
+                                <div class="mobile-input" style="height:40px; justify-content:center; margin-bottom:0;">
+                                    <span style="color:#0f172a; font-weight:700;">$275.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; font-size:12px;">
+                            <span style="font-weight:700; color:#0f172a;">Total: $275.00</span>
                         </div>
                     </div>
 
                     <div style="border:1px dashed #e2e8f0; border-radius:10px; padding:14px; text-align:center; margin-bottom:16px;">
-                        <span style="font-size:14px; font-weight:600; color:#3b82f6;">+ Add Labor Item</span>
+                        <span style="font-size:14px; font-weight:600; color:#3b82f6;">+ Add Equipment</span>
                     </div>
 
                     <div style="display:flex; gap:8px;">
-                        <div class="mobile-btn" style="flex:1; background:#f1f5f9; color:#0f172a;">← Back</div>
-                        <div class="mobile-btn mobile-btn-primary" style="flex:1;">Next →</div>
+                        <div class="mobile-btn" style="flex:1; background:#f1f5f9; color:#0f172a;">&larr; Previous Step</div>
+                        <div class="mobile-btn mobile-btn-primary" style="flex:1;">Next Step &rarr;</div>
                     </div>
                 </div>
             </div>
 
-            <h3 style="margin-top:24px;">Step 5: Photos</h3>
+            <!-- ========================= STEP 5: SUMMARY ========================= -->
+            <h3 style="margin-top:24px;">Step 5: Summary (Read-Only Recap)</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Full read-only recap of ALL entered data in a scrollable view. Includes &ldquo;Other&rdquo; line items (4th category). Provides Preview Tag and Prepare Signatures actions.</p>
             <div class="mobile-frame">
                 <div class="mobile-header">
-                    <span style="font-size:18px;">←</span>
-                    Work Order
-                    <span style="flex:1;"></span>
-                    <span style="font-size:12px; opacity:0.7;">Step 5 of 6</span>
+                    <span style="font-size:13px; opacity:0.9;">EXIT</span>
+                    <span style="flex:1; text-align:center;">New T&amp;M Tag</span>
+                    <span style="font-size:13px; opacity:0.9;">SAVE</span>
                 </div>
-                <div class="mobile-body">
+                <div class="mobile-body" style="min-height:700px;">
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width:83%;"></div>
+                        <div class="progress-fill" style="width:100%; background:#10b981;"></div>
                     </div>
 
-                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Photos</div>
+                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Summary</div>
 
-                    <!-- Photo grid -->
-                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:16px;">
-                        <div style="aspect-ratio:1; background:#f1f5f9; border-radius:10px; display:flex; align-items:center; justify-content:center; border:1px solid #e2e8f0;">
-                            <div style="text-align:center;">
-                                <div style="font-size:24px;">🖼️</div>
-                                <div style="font-size:10px; color:#64748b; margin-top:4px;">IMG_001.jpg</div>
-                            </div>
+                    <!-- Info Section -->
+                    <div class="summary-section">
+                        <div class="summary-section-title">Info</div>
+                        <div class="summary-row">
+                            <span class="summary-label">Project</span>
+                            <span class="summary-value">Riverdale Phase 2</span>
                         </div>
-                        <div style="aspect-ratio:1; background:#f1f5f9; border-radius:10px; display:flex; align-items:center; justify-content:center; border:1px solid #e2e8f0;">
-                            <div style="text-align:center;">
-                                <div style="font-size:24px;">🖼️</div>
-                                <div style="font-size:10px; color:#64748b; margin-top:4px;">IMG_002.jpg</div>
-                            </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Cost Code</span>
+                            <span class="summary-value">26-0100</span>
                         </div>
-                        <div style="aspect-ratio:1; background:#fff; border-radius:10px; display:flex; align-items:center; justify-content:center; border:2px dashed #e2e8f0;">
-                            <div style="text-align:center;">
-                                <div style="font-size:24px; color:#94a3b8;">+</div>
-                            </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Title</span>
+                            <span class="summary-value">Extra insulation &mdash; 3rd floor</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Dates</span>
+                            <span class="summary-value">Mar 28, 29, 30</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Photos / Docs</span>
+                            <span class="summary-value">3 / 1</span>
                         </div>
                     </div>
 
-                    <div class="mobile-btn mobile-btn-primary" style="margin-bottom:8px;">📷 Upload Photos</div>
-                    <div style="text-align:center; font-size:12px; color:#94a3b8; margin-bottom:20px;">Maximum 5 photos</div>
+                    <!-- Labor Section -->
+                    <div class="summary-section">
+                        <div class="summary-section-title">Labor</div>
+                        <div style="font-size:13px; color:#334155; margin-bottom:4px;">
+                            <strong>Journeyman Insulator</strong> &times; 3 workers
+                        </div>
+                        <div style="font-size:12px; color:#64748b;">ST 8.0 &bull; OT 2.0 &bull; DT 0.0 &bull; Prem 0.0 &bull; Prem OT 0.0</div>
+                        <div style="font-size:12px; color:#64748b;">Date: Mar 30, 2026</div>
+                        <div style="text-align:right; font-size:13px; font-weight:700; color:#0f172a; margin-top:4px;">$1,950.00</div>
+                    </div>
 
-                    <div style="display:flex; gap:8px;">
-                        <div class="mobile-btn" style="flex:1; background:#f1f5f9; color:#0f172a;">← Back</div>
-                        <div class="mobile-btn mobile-btn-primary" style="flex:1;">Next →</div>
+                    <!-- Material Section -->
+                    <div class="summary-section">
+                        <div class="summary-section-title">Material</div>
+                        <div style="font-size:13px; color:#334155;">R-30 Fiberglass Batts &mdash; 24 @ $18.50</div>
+                        <div style="text-align:right; font-size:13px; font-weight:700; color:#0f172a; margin-top:4px;">$444.00</div>
+                    </div>
+
+                    <!-- Equipment Section -->
+                    <div class="summary-section">
+                        <div class="summary-section-title">Equipment</div>
+                        <div style="font-size:13px; color:#334155;">Scissor Lift 26ft &mdash; 1 @ $275.00/day</div>
+                        <div style="text-align:right; font-size:13px; font-weight:700; color:#0f172a; margin-top:4px;">$275.00</div>
+                    </div>
+
+                    <!-- Other Section -->
+                    <div class="summary-section">
+                        <div class="summary-section-title">Other <span class="gap-tag gap-new">NEW</span></div>
+                        <div style="font-size:13px; color:#334155;">Dumpster Rental &mdash; 2 &times; Day &times; 1 unit</div>
+                        <div style="text-align:right; font-size:13px; font-weight:700; color:#0f172a; margin-top:4px;">$350.00</div>
+                    </div>
+
+                    <!-- Grand Total -->
+                    <div style="background:#0f172a; border-radius:10px; padding:14px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                        <span style="font-size:14px; font-weight:600; color:#fff;">Grand Total</span>
+                        <span style="font-size:20px; font-weight:800; color:#fff;">$3,019.00</span>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mobile-btn" style="background:#fff; color:#3b82f6; border:1px solid #3b82f6; margin-bottom:8px;">&#128196; Preview Tag (PDF)</div>
+                    <div class="mobile-btn mobile-btn-success" style="margin-bottom:8px;">Prepare Signatures &rarr;</div>
+
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <div class="mobile-btn" style="flex:1; background:#f1f5f9; color:#0f172a;">&larr; Previous Step</div>
                     </div>
                 </div>
             </div>
 
-            <h3 style="margin-top:24px;">Step 6: Signatures</h3>
+            <!-- ========================= PREPARE SIGNATURES ========================= -->
+            <h3 style="margin-top:24px;">Prepare Signatures (Separate Flow from Summary)</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Accessed from the Summary page &mdash; NOT a wizard step. Manages signers (required/optional), signing order, email message, distribution list, and Collect Signatures action.</p>
             <div class="mobile-frame">
                 <div class="mobile-header">
-                    <span style="font-size:18px;">←</span>
-                    Work Order
+                    <span style="font-size:13px; opacity:0.9;">&larr; Back to Summary</span>
                     <span style="flex:1;"></span>
-                    <span style="font-size:12px; opacity:0.7;">Step 6 of 6</span>
                 </div>
-                <div class="mobile-body" style="min-height:480px;">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width:100%;"></div>
+                <div class="mobile-body" style="min-height:620px;">
+                    <div style="font-size:16px; font-weight:700; margin-bottom:4px;">Prepare Signatures</div>
+                    <div style="font-size:12px; color:#64748b; margin-bottom:16px;">Extra insulation &mdash; 3rd floor east wing</div>
+
+                    <!-- Sign Yourself -->
+                    <div style="border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:12px; display:flex; align-items:center; gap:12px;">
+                        <div style="width:20px; height:20px; border-radius:4px; background:#3b82f6; display:flex; align-items:center; justify-content:center;">
+                            <span style="color:#fff; font-size:12px; font-weight:700;">&#10003;</span>
+                        </div>
+                        <div style="flex:1;">
+                            <div style="font-size:14px; font-weight:600; color:#0f172a;">Sign yourself</div>
+                            <div style="font-size:12px; color:#64748b;">You will be prompted to sign</div>
+                        </div>
                     </div>
 
-                    <div style="font-size:16px; font-weight:700; margin-bottom:16px;">Signatures</div>
+                    <!-- Signers List -->
+                    <div style="font-size:13px; font-weight:700; color:#0f172a; margin-bottom:8px;">Signers</div>
 
-                    <!-- Worker Signature -->
-                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Your Signature *</div>
-                    <div class="mobile-input">
-                        <span style="color:#94a3b8;">Print your name...</span>
-                    </div>
-                    <div style="width:100%; height:120px; border:2px dashed #e2e8f0; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
-                        <span style="font-size:13px; color:#94a3b8;">Tap to sign</span>
-                    </div>
-
-                    <!-- Customer Signature -->
-                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Customer Signature (optional)</div>
-                    <div class="mobile-input">
-                        <span style="color:#94a3b8;">Print customer name...</span>
-                    </div>
-                    <div style="width:100%; height:120px; border:2px dashed #e2e8f0; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
-                        <span style="font-size:13px; color:#94a3b8;">Tap to sign</span>
+                    <div class="signer-card">
+                        <div class="signer-avatar">JD</div>
+                        <div class="signer-info">
+                            <div class="signer-name">John Doe</div>
+                            <div class="signer-detail">john@pedersencorp.com &bull; Pedersen Corp</div>
+                        </div>
+                        <span class="signer-badge signer-required">REQUIRED</span>
                     </div>
 
-                    <div class="mobile-btn mobile-btn-success">Submit Work Order</div>
+                    <div class="signer-card">
+                        <div class="signer-avatar">SM</div>
+                        <div class="signer-info">
+                            <div class="signer-name">Sarah Mitchell</div>
+                            <div class="signer-detail">sarah@gcpartners.com &bull; GC Partners</div>
+                        </div>
+                        <span class="signer-badge signer-optional">OPTIONAL</span>
+                    </div>
+
+                    <div style="border:1px dashed #e2e8f0; border-radius:10px; padding:12px; text-align:center; margin-bottom:16px;">
+                        <span style="font-size:14px; font-weight:600; color:#3b82f6;">+ Add Signer</span>
+                    </div>
+
+                    <!-- Signing Order Toggle -->
+                    <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-top:1px solid #f1f5f9; margin-bottom:12px;">
+                        <div>
+                            <div style="font-size:13px; font-weight:600; color:#0f172a;">Signing Order</div>
+                            <div style="font-size:11px; color:#64748b;">Require signatures in order</div>
+                        </div>
+                        <div class="toggle-track">
+                            <div class="toggle-thumb"></div>
+                        </div>
+                    </div>
+
+                    <!-- Email Message (collapsible) -->
+                    <div style="border-top:1px solid #f1f5f9; padding-top:12px; margin-bottom:12px;">
+                        <div style="font-size:13px; font-weight:600; color:#0f172a; margin-bottom:6px;">Email Message to Signers <span style="font-size:11px; color:#94a3b8; font-weight:400;">(optional)</span></div>
+                        <div class="mobile-input" style="height:80px; align-items:flex-start; padding-top:12px;">
+                            <span style="color:#94a3b8; font-size:13px;">Please review and sign the attached T&amp;M tag...</span>
+                        </div>
+                    </div>
+
+                    <!-- Send signed copy to -->
+                    <div style="border-top:1px solid #f1f5f9; padding-top:12px; margin-bottom:16px;">
+                        <div style="font-size:13px; font-weight:600; color:#0f172a; margin-bottom:6px;">Send signed copy to</div>
+                        <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;">
+                            <span class="pill-chip pill-green">billing@pedersencorp.com <span style="cursor:pointer; margin-left:2px;">&times;</span></span>
+                            <span class="pill-chip pill-add">+ Add</span>
+                        </div>
+                    </div>
+
+                    <!-- Collect Signatures Button -->
+                    <div class="mobile-btn mobile-btn-success" style="margin-bottom:8px;">&#9997; Collect Signatures</div>
+                    <div class="mobile-btn" style="background:#f1f5f9; color:#0f172a;">&larr; Back to Summary</div>
                 </div>
             </div>
+
+            <!-- Add Signer Modal -->
+            <h3 style="margin-top:24px;">Prepare Signatures Sub-Screen: Add Signer</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Two tabs: &ldquo;Select a Signer&rdquo; (search existing) and &ldquo;Add a Signer&rdquo; (create new with First Name, Last Name, Email, Company, Signer Type).</p>
+            <div class="mobile-frame">
+                <div class="mobile-header">
+                    <span style="font-size:18px;">&times;</span>
+                    <span style="flex:1; text-align:center;">Add Signer</span>
+                </div>
+                <div class="mobile-body" style="min-height:450px; padding:0;">
+                    <!-- Tabs -->
+                    <div style="display:flex; border-bottom:2px solid #e2e8f0;">
+                        <div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:600; color:#94a3b8; cursor:pointer;">Select a Signer</div>
+                        <div style="flex:1; padding:12px; text-align:center; font-size:13px; font-weight:700; color:#3b82f6; border-bottom:2px solid #3b82f6; margin-bottom:-2px; cursor:pointer;">Add a Signer</div>
+                    </div>
+
+                    <div style="padding:16px;">
+                        <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">First Name *</div>
+                        <div class="mobile-input" style="height:44px;">
+                            <span style="color:#94a3b8;">First name</span>
+                        </div>
+
+                        <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Last Name *</div>
+                        <div class="mobile-input" style="height:44px;">
+                            <span style="color:#94a3b8;">Last name</span>
+                        </div>
+
+                        <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Email *</div>
+                        <div class="mobile-input" style="height:44px;">
+                            <span style="color:#94a3b8;">email@company.com</span>
+                        </div>
+
+                        <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Company</div>
+                        <div class="mobile-input" style="height:44px;">
+                            <span style="color:#94a3b8;">Company name</span>
+                        </div>
+
+                        <div style="font-size:12px; font-weight:600; color:#64748b; margin-bottom:6px;">Signer Type *</div>
+                        <div style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div style="flex:1; padding:10px; border:2px solid #3b82f6; border-radius:10px; text-align:center; font-size:13px; font-weight:600; color:#3b82f6; background:#eff6ff;">Required</div>
+                            <div style="flex:1; padding:10px; border:1px solid #e2e8f0; border-radius:10px; text-align:center; font-size:13px; font-weight:600; color:#64748b;">Optional</div>
+                        </div>
+
+                        <div class="mobile-btn mobile-btn-primary">Add Signer</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- Section 4 -->
+    <!-- ================================================================ -->
+    <!-- Section 4: Data Model                                            -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="data-model">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">4. Data Model <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">4. Data Model <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
-            <p>No new Prisma schema changes are required. The mobile form consumes the same work order models established in WO-1 (Job with <code>jobType: WORK_ORDER</code>), WO-2 (WorkOrderLineItem), and WO-3 (WorkOrderSignature, Asset for photos).</p>
+            <p>The mobile form builds on the work order models established in WO-1 through WO-3 but introduces <strong>new fields and models</strong> to support the 24 gap features. Changes below are additive &mdash; no existing fields are removed.</p>
 
-            <h3>Shared Models Used</h3>
+            <h3>Existing Models (Extended)</h3>
             <table class="schema-table">
                 <thead>
                     <tr><th>Model</th><th>Source</th><th>Mobile Usage</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><code>Job</code></td><td>WO-1</td><td>Work order record (jobType = WORK_ORDER)</td></tr>
+                    <tr><td><code>Job</code></td><td>WO-1</td><td>Work order record (<code>jobType = WORK_ORDER</code>). Now also stores <code>workOrderTitle</code> (maps to <code>name</code>) and <code>costCode</code></td></tr>
                     <tr><td><code>WorkOrderLineItem</code></td><td>WO-2</td><td>Labor, material, and equipment line items</td></tr>
-                    <tr><td><code>WorkOrderSignature</code></td><td>WO-3</td><td>Worker and customer signatures</td></tr>
-                    <tr><td><code>Asset</code></td><td>Existing</td><td>Photo attachments via createAsset mutation</td></tr>
+                    <tr><td><code>Asset</code></td><td>Existing</td><td>Photo &amp; document attachments (up to 50 per WO)</td></tr>
                     <tr><td><code>TradeLevel</code></td><td>Existing</td><td>Trade level picker for labor items</td></tr>
+                </tbody>
+            </table>
+
+            <h3>New / Modified Fields on <code>WorkOrderLaborItem</code></h3>
+            <table class="schema-table">
+                <thead>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>qtyOfWorkers</code></td><td><code>Int</code></td><td>Number of workers (multiplier for labor hours)</td></tr>
+                    <tr><td><code>premiumTimeHours</code></td><td><code>Decimal</code></td><td>Premium time hours (4th hour column)</td></tr>
+                    <tr><td><code>premiumOvertimeHours</code></td><td><code>Decimal</code></td><td>Premium overtime hours (5th hour column)</td></tr>
+                    <tr><td><code>dateOfWork</code></td><td><code>DateTime</code></td><td>Per-row date of work performed</td></tr>
+                </tbody>
+            </table>
+
+            <h3>New Model: <code>WorkOrderOtherItem</code></h3>
+            <table class="schema-table">
+                <thead>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>id</code></td><td><code>String @id</code></td><td>nanoid primary key</td></tr>
+                    <tr><td><code>jobId</code></td><td><code>String</code></td><td>FK to parent Job (work order)</td></tr>
+                    <tr><td><code>name</code></td><td><code>String</code></td><td>Line item name/description</td></tr>
+                    <tr><td><code>qty</code></td><td><code>Decimal</code></td><td>Quantity</td></tr>
+                    <tr><td><code>unitOfMeasure</code></td><td><code>String</code></td><td>Unit of measure (e.g. &ldquo;Day&rdquo;, &ldquo;Each&rdquo;, &ldquo;LF&rdquo;)</td></tr>
+                    <tr><td><code>qtyOfUnit</code></td><td><code>Decimal</code></td><td>Quantity of unit (multiplier)</td></tr>
+                    <tr><td><code>unitPrice</code></td><td><code>Decimal</code></td><td>Price per unit</td></tr>
+                </tbody>
+            </table>
+
+            <h3>New Model: <code>WorkOrderSigner</code></h3>
+            <table class="schema-table">
+                <thead>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>id</code></td><td><code>String @id</code></td><td>nanoid primary key</td></tr>
+                    <tr><td><code>jobId</code></td><td><code>String</code></td><td>FK to parent Job (work order)</td></tr>
+                    <tr><td><code>firstName</code></td><td><code>String</code></td><td>Signer first name</td></tr>
+                    <tr><td><code>lastName</code></td><td><code>String</code></td><td>Signer last name</td></tr>
+                    <tr><td><code>email</code></td><td><code>String</code></td><td>Signer email for notifications</td></tr>
+                    <tr><td><code>company</code></td><td><code>String?</code></td><td>Signer company affiliation</td></tr>
+                    <tr><td><code>signerType</code></td><td><code>Enum(REQUIRED, OPTIONAL)</code></td><td>Whether signer is required or optional</td></tr>
+                    <tr><td><code>signingOrder</code></td><td><code>Int?</code></td><td>Order in signing sequence (null = unordered)</td></tr>
+                    <tr><td><code>status</code></td><td><code>Enum(PENDING, SIGNED, DECLINED)</code></td><td>Current signature status</td></tr>
+                    <tr><td><code>signedAt</code></td><td><code>DateTime?</code></td><td>Timestamp of signature</td></tr>
+                </tbody>
+            </table>
+
+            <h3>New Field on <code>Job</code> (Work Order)</h3>
+            <table class="schema-table">
+                <thead>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>workDates</code></td><td><code>Json</code></td><td>Array of ISO date strings for multi-date &ldquo;Dates of Work Performed&rdquo;</td></tr>
+                    <tr><td><code>costCode</code></td><td><code>String?</code></td><td>Optional cost code reference</td></tr>
+                    <tr><td><code>descriptionRichText</code></td><td><code>String?</code></td><td>Rich text description (HTML/JSON)</td></tr>
+                    <tr><td><code>signingOrderEnabled</code></td><td><code>Boolean</code></td><td>Whether signing order is enforced</td></tr>
+                    <tr><td><code>signatureEmailMessage</code></td><td><code>String?</code></td><td>Custom message sent to signers</td></tr>
+                    <tr><td><code>signedCopyRecipients</code></td><td><code>Json</code></td><td>Array of email addresses for signed copy distribution</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Section 5 -->
+    <!-- ================================================================ -->
+    <!-- Section 5: API Surface                                           -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="api-surface">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">5. API Surface <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">5. API Surface <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
-            <p>The mobile form uses the same GraphQL mutations as the desktop WO creation (WO-3). No new API endpoints are required.</p>
+            <p>Extends the existing WO-3 API surface with new queries and mutations for signer management, project search, PDF preview, and signature collection.</p>
 
-            <h3>Mutations Used</h3>
+            <h3>Existing Mutations (Reused)</h3>
             <table class="schema-table">
                 <thead>
                     <tr><th>Mutation</th><th>Source</th><th>Mobile Usage</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><code>createWorkOrder</code></td><td>WO-3</td><td>Create the work order job record</td></tr>
-                    <tr><td><code>upsertWorkOrderLineItems</code></td><td>WO-3</td><td>Save labor, material, and equipment line items</td></tr>
-                    <tr><td><code>createAsset</code></td><td>Existing</td><td>Upload photos from camera</td></tr>
+                    <tr><td><code>createWorkOrder</code></td><td>WO-3</td><td>Create work order record (extended with new fields: <code>workDates</code>, <code>costCode</code>, <code>descriptionRichText</code>)</td></tr>
+                    <tr><td><code>upsertWorkOrderLineItems</code></td><td>WO-3</td><td>Save labor, material, equipment, and &ldquo;other&rdquo; line items</td></tr>
+                    <tr><td><code>createAsset</code></td><td>Existing</td><td>Upload photos and documents (up to 50 per WO)</td></tr>
                 </tbody>
             </table>
 
-            <h3>Queries Used</h3>
+            <h3>New Mutations</h3>
+            <table class="schema-table">
+                <thead>
+                    <tr><th>Mutation</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>createWorkOrderSigner</code></td><td>Add a new signer to a work order (firstName, lastName, email, company, signerType)</td></tr>
+                    <tr><td><code>updateWorkOrderSigner</code></td><td>Update signer details or signing order position</td></tr>
+                    <tr><td><code>deleteWorkOrderSigner</code></td><td>Remove a signer from a work order</td></tr>
+                    <tr><td><code>updateSigningOrder</code></td><td>Bulk update signing order positions and toggle <code>signingOrderEnabled</code></td></tr>
+                    <tr><td><code>collectSignatures</code></td><td>Trigger signature collection: sends email invitations to all signers with the PDF attachment</td></tr>
+                    <tr><td><code>upsertWorkOrderOtherItems</code></td><td>Create/update &ldquo;Other&rdquo; line items (name, qty, UoM, qtyOfUnit, unitPrice)</td></tr>
+                    <tr><td><code>createProject</code></td><td>Inline project creation from the Project Picker (name, company)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Existing Queries (Reused)</h3>
             <table class="schema-table">
                 <thead>
                     <tr><th>Query</th><th>Mobile Usage</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><code>tradeLevels</code></td><td>Populate trade level picker in SelectionSlideup</td></tr>
-                    <tr><td><code>materials</code></td><td>Populate material picker in SelectionSlideup</td></tr>
-                    <tr><td><code>equipment</code></td><td>Populate equipment picker in SelectionSlideup</td></tr>
-                    <tr><td><code>companies</code></td><td>Populate company picker in SelectionSlideup</td></tr>
+                    <tr><td><code>tradeLevels</code></td><td>Populate trade level picker / Add Worker sub-screen</td></tr>
+                    <tr><td><code>materials</code></td><td>Populate material catalog for &ldquo;Select from Catalog&rdquo;</td></tr>
+                    <tr><td><code>equipment</code></td><td>Populate equipment catalog for &ldquo;Select from Catalog&rdquo;</td></tr>
+                    <tr><td><code>companies</code></td><td>Populate company picker for signer creation</td></tr>
+                </tbody>
+            </table>
+
+            <h3>New Queries</h3>
+            <table class="schema-table">
+                <thead>
+                    <tr><th>Query</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>projects</code></td><td>Search projects/jobs for the Project Picker (with pagination and text search)</td></tr>
+                    <tr><td><code>workOrderSigners</code></td><td>List all signers for a work order (with status and signing order)</td></tr>
+                    <tr><td><code>previewWorkOrderPdf</code></td><td>Generate and return a preview PDF URL for the work order T&amp;M tag</td></tr>
+                    <tr><td><code>existingSigners</code></td><td>Search previously-used signers across work orders for the &ldquo;Select a Signer&rdquo; tab</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Section 6 -->
+    <!-- ================================================================ -->
+    <!-- Section 6: Change Surface                                        -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="change-surface">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">6. Change Surface <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">6. Change Surface <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
             <div class="blast-summary">
-                <div class="blast-row"><span class="blast-label">New Files</span><span class="blast-value">11</span></div>
-                <div class="blast-row"><span class="blast-label">Modified Files</span><span class="blast-value">2</span></div>
+                <div class="blast-row"><span class="blast-label">New Files</span><span class="blast-value">16</span></div>
+                <div class="blast-row"><span class="blast-label">Modified Files</span><span class="blast-value">3</span></div>
                 <div class="blast-row"><span class="blast-label">Deleted Files</span><span class="blast-value">0</span></div>
             </div>
 
             <h3>New Files</h3>
             <ul>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/pages/work-orders/create.tsx</code> — Mobile WO creation page</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/WorkOrderForm.tsx</code> — Multi-step form container</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/DateInfoStep.tsx</code> — Step 1: Date &amp; Info</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/LaborStep.tsx</code> — Step 2: Labor Items</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/MaterialsStep.tsx</code> — Step 3: Materials</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/EquipmentStep.tsx</code> — Step 4: Equipment</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/PhotosStep.tsx</code> — Step 5: Photos</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/SignaturesStep.tsx</code> — Step 6: Signatures</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Pickers/TradeLevelPicker.tsx</code> — Trade level SelectionSlideup</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Pickers/MaterialPicker.tsx</code> — Material SelectionSlideup</li>
-                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Pickers/EquipmentPicker.tsx</code> — Equipment SelectionSlideup</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/pages/work-orders/create.tsx</code> &mdash; Mobile WO creation page</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/WorkOrderWizard.tsx</code> &mdash; 5-step wizard container with EXIT/SAVE header</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/InfoStep.tsx</code> &mdash; Step 1: Info (project picker, cost code, title, rich text, multi-date, photos/docs)</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/LaborStep.tsx</code> &mdash; Step 2: Labor (qty workers, 5 hour columns, per-row date)</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/MaterialStep.tsx</code> &mdash; Step 3: Material (with 3-way add bottom sheet)</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/EquipmentStep.tsx</code> &mdash; Step 4: Equipment (with 3-way add bottom sheet)</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Steps/SummaryStep.tsx</code> &mdash; Step 5: Read-only summary with Other items, Preview Tag, Prepare Signatures</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Signatures/PrepareSignatures.tsx</code> &mdash; Signature preparation flow (signers, order, email, distribution)</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Signatures/AddSignerModal.tsx</code> &mdash; Add/Select signer modal with two tabs</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Pickers/ProjectPicker.tsx</code> &mdash; Full-screen project picker with search and CREATE NEW</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Pickers/TradeLevelPicker.tsx</code> &mdash; Trade level / Add Worker sub-screen</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Pickers/MaterialCatalogPicker.tsx</code> &mdash; Material catalog selection</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/Pickers/EquipmentCatalogPicker.tsx</code> &mdash; Equipment catalog selection</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/RichTextEditor.tsx</code> &mdash; Full-screen rich text editor with formatting toolbar</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/BottomSheet.tsx</code> &mdash; Reusable 3-way add bottom sheet component</li>
+                <li><span class="action-new">NEW</span> <code>apps/mobile/src/components/WorkOrders/PdfPreview.tsx</code> &mdash; In-app PDF preview component</li>
             </ul>
 
             <h3>Modified Files</h3>
             <ul>
-                <li><span class="action-mod">MOD</span> <code>apps/mobile/src/components/SimplifiedJobTasks.tsx</code> — Add WO creation entry point</li>
-                <li><span class="action-mod">MOD</span> <code>apps/mobile/src/components/SelectionSlideups/index.ts</code> — Export new picker components</li>
+                <li><span class="action-mod">MOD</span> <code>apps/mobile/src/components/SimplifiedJobTasks.tsx</code> &mdash; Add WO creation entry point</li>
+                <li><span class="action-mod">MOD</span> <code>apps/mobile/src/components/SelectionSlideups/index.ts</code> &mdash; Export new picker components</li>
+                <li><span class="action-mod">MOD</span> <code>apps/api/src/graphql/models/WorkOrder.ts</code> &mdash; Add signer mutations, other items, PDF preview query, project search</li>
             </ul>
         </div>
     </div>
 
-    <!-- Section 7 -->
+    <!-- ================================================================ -->
+    <!-- Section 7: Acceptance Criteria                                   -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="acceptance-criteria">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">7. Acceptance Criteria <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">7. Acceptance Criteria <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
+            <h3>Flow &amp; Navigation</h3>
             <ul class="criteria-list">
-                <li><div class="criteria-check"></div><span>User can navigate to work order creation from the mobile app and see a 6-step guided form.</span></li>
-                <li><div class="criteria-check"></div><span>Progress bar updates correctly as user advances through steps.</span></li>
-                <li><div class="criteria-check"></div><span>SelectionSlideup pickers for trade level, material, and equipment display correct options from the API.</span></li>
-                <li><div class="criteria-check"></div><span>Labor item auto-calculates total based on selected trade level rates and entered hours (ST/OT/DT).</span></li>
-                <li><div class="criteria-check"></div><span>User can capture up to 5 photos using the device camera and see thumbnails in the grid.</span></li>
-                <li><div class="criteria-check"></div><span>Touch-based signature canvas captures worker signature (required) and optional customer signature.</span></li>
+                <li><div class="criteria-check"></div><span>User sees a 5-step wizard (Info, Labor, Material, Equipment, Summary) with EXIT/SAVE header pattern on every step.</span></li>
+                <li><div class="criteria-check"></div><span>Progress bar updates correctly across all 5 steps (20%, 40%, 60%, 80%, 100%).</span></li>
+                <li><div class="criteria-check"></div><span>Full-width &ldquo;Previous Step&rdquo; and &ldquo;Next Step&rdquo; navigation buttons appear on all applicable steps.</span></li>
+                <li><div class="criteria-check"></div><span>EXIT button prompts save confirmation; SAVE button persists current draft without leaving.</span></li>
+            </ul>
+
+            <h3>Step 1: Info</h3>
+            <ul class="criteria-list">
+                <li><div class="criteria-check"></div><span>Project/Job Picker is the first field, required. Opens full-screen picker with search and CREATE NEW PROJECT option.</span></li>
+                <li><div class="criteria-check"></div><span>Inline project creation works: user can enter project name and company, and the new project appears selected.</span></li>
+                <li><div class="criteria-check"></div><span>Cost Code field is optional text input.</span></li>
+                <li><div class="criteria-check"></div><span>T&amp;M Tag Title field is present and maps to <code>Job.name</code>.</span></li>
+                <li><div class="criteria-check"></div><span>Description field opens a full-screen rich text editor with Bold, Italic, Underline, Ordered List, Unordered List, Indent, Outdent, Clear Formatting, and DONE button.</span></li>
+                <li><div class="criteria-check"></div><span>Multi-date &ldquo;Dates of Work Performed&rdquo; displays as green pill chips. User can add dates with + button and remove with &times;.</span></li>
+                <li><div class="criteria-check"></div><span>Photos &amp; Documents section shows on Step 1 with 0/50 counter, separate Photo and Document subsections.</span></li>
+                <li><div class="criteria-check"></div><span>Photo/document upload supports Camera, Photo Library, and Files sources. Accepts JPEG, PNG, and PDF.</span></li>
+            </ul>
+
+            <h3>Step 2: Labor</h3>
+            <ul class="criteria-list">
+                <li><div class="criteria-check"></div><span>&ldquo;Qty of Workers&rdquo; column is present and multiplies the labor total.</span></li>
+                <li><div class="criteria-check"></div><span>5 hour columns are displayed: ST, OT, DT, Premium Time, Premium OT. Table scrolls horizontally on narrow screens.</span></li>
+                <li><div class="criteria-check"></div><span>Each labor row has its own Date of Work picker.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Add Worker&rdquo; button opens imported rates sub-screen showing available trade levels with ST/OT/DT rates.</span></li>
+                <li><div class="criteria-check"></div><span>Empty state is shown on the Add Worker sub-screen when no trade-level rates are configured.</span></li>
+                <li><div class="criteria-check"></div><span>Labor item auto-calculates total based on trade level rates, hours, and worker count.</span></li>
+            </ul>
+
+            <h3>Steps 3 &amp; 4: Material &amp; Equipment</h3>
+            <ul class="criteria-list">
+                <li><div class="criteria-check"></div><span>Tapping &ldquo;+ Add Material&rdquo; or &ldquo;+ Add Equipment&rdquo; opens a 3-way bottom sheet with: Select from Catalog, Add Blank Row, and Bulk Edit (Phase 2, disabled).</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Select from Catalog&rdquo; opens an import rate sub-screen with search and item list.</span></li>
+                <li><div class="criteria-check"></div><span>Empty state is shown on catalog sub-screens when no rates are imported.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Add Blank Row&rdquo; creates an empty row for manual entry.</span></li>
+            </ul>
+
+            <h3>Step 5: Summary</h3>
+            <ul class="criteria-list">
+                <li><div class="criteria-check"></div><span>Summary page displays a full read-only recap of all entered data: Info, Labor, Material, Equipment, and Other items.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Other&rdquo; line-item category is supported as a 4th item type with Name, Qty, Unit of Measure, and Qty of Unit fields.</span></li>
+                <li><div class="criteria-check"></div><span>Grand total is calculated and displayed across all line-item categories.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Preview Tag&rdquo; button generates and opens an in-app PDF preview of the T&amp;M tag.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Prepare Signatures&rdquo; button navigates to the signature preparation flow.</span></li>
+            </ul>
+
+            <h3>Prepare Signatures</h3>
+            <ul class="criteria-list">
+                <li><div class="criteria-check"></div><span>Prepare Signatures is a separate flow accessed from Summary, NOT a wizard step.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Sign yourself&rdquo; checkbox is available for the creator to include their own signature.</span></li>
+                <li><div class="criteria-check"></div><span>User can add signers via &ldquo;Select a Signer&rdquo; tab (search existing) or &ldquo;Add a Signer&rdquo; tab (create new with First Name, Last Name, Email, Company, Signer Type).</span></li>
+                <li><div class="criteria-check"></div><span>Each signer is tagged as REQUIRED or OPTIONAL.</span></li>
+                <li><div class="criteria-check"></div><span>Signing Order toggle enables/disables ordered signature collection. When enabled, signers can be reordered.</span></li>
+                <li><div class="criteria-check"></div><span>Collapsible email message textarea allows custom message to signers.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Send signed copy to&rdquo; distribution list allows adding email recipients who receive the final signed PDF.</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Collect Signatures&rdquo; button triggers signature collection (distinct from Submit).</span></li>
+                <li><div class="criteria-check"></div><span>&ldquo;Back to Summary&rdquo; button navigates back to the Summary step.</span></li>
+            </ul>
+
+            <h3>General</h3>
+            <ul class="criteria-list">
                 <li><div class="criteria-check"></div><span>User can save a draft at any step and resume it later; multiple concurrent drafts are supported.</span></li>
+                <li><div class="criteria-check"></div><span>Form handles validation errors inline (required fields highlighted, error messages displayed).</span></li>
                 <li><div class="criteria-check"></div><span>On submission, a notification is sent to the designated supervisor.</span></li>
-                <li><div class="criteria-check"></div><span>Form handles validation errors inline (required fields, minimum 1 labor item).</span></li>
             </ul>
         </div>
     </div>
 
-    <!-- Section 8 -->
+    <!-- ================================================================ -->
+    <!-- Section 8: Dependencies                                          -->
+    <!-- ================================================================ -->
     <div class="uis-section" id="dependencies">
-        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">8. Dependencies <span class="toggle-icon">▼</span></h2>
+        <h2 class="collapsible-toggle open" onclick="toggleSection(this)">8. Dependencies <span class="toggle-icon">&#9660;</span></h2>
         <div class="collapsible-body open">
-            <p><strong>Parent:</strong> <a class="dep-tag dep-enables" href="uis-20-tm-work-orders.html">UIS-20 — T&amp;M Work Orders</a></p>
+            <p><strong>Parent:</strong> <a class="dep-tag dep-enables" href="uis-20-tm-work-orders.html">UIS-20 &mdash; T&amp;M Work Orders</a></p>
             <h3>Requires</h3>
             <p>
                 <span class="dep-tag dep-requires">WO-1: Data Model &amp; Schema</span>
                 <span class="dep-tag dep-requires">WO-2: Work Order Line Items</span>
                 <span class="dep-tag dep-requires">WO-3: Desktop Detail Page (shared mutations)</span>
             </p>
-            <p style="margin-top:8px; font-size:13px; color:#64748b;">The data model (WO-1), line item schema (WO-2), and GraphQL mutations (WO-3) must all be in place before the mobile form can persist data.</p>
+            <p style="margin-top:8px; font-size:13px; color:#64748b;">The data model (WO-1), line item schema (WO-2), and GraphQL mutations (WO-3) must all be in place before the mobile form can persist data. New signer and &ldquo;other item&rdquo; models can be added as part of this spec&rsquo;s implementation.</p>
 
             <h3>Enables</h3>
-            <p><span class="dep-tag dep-none">Leaf — no downstream dependents</span></p>
+            <p><span class="dep-tag dep-none">Leaf &mdash; no downstream dependents</span></p>
         </div>
     </div>
 
