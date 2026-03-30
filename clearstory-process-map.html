@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clearstory vs Appello UIS-20 — Full Process Map &amp; Gap Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2236;
+  --border: #1e293b;
+  --border-hover: #334155;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --accent-blue: #3b82f6;
+  --accent-green: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-red: #ef4444;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+  --accent-cyan: #06b6d4;
+  --clearstory: #22c55e;
+  --appello: #3b82f6;
+  --covered: #10b981;
+  --missing: #f59e0b;
+  --out-scope: #64748b;
+  --advantage: #8b5cf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.page { max-width: 1200px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* Header */
+.hero { text-align: center; margin-bottom: 56px; }
+.hero-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-green); background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; }
+.hero h1 .cs { color: var(--clearstory); }
+.hero h1 .ap { color: var(--appello); }
+.hero p { font-size: 16px; color: var(--text-muted); max-width: 680px; margin: 0 auto; }
+
+/* Nav tabs */
+.nav { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-bottom: 40px; overflow-x: auto; }
+.nav button { flex: 1; min-width: 120px; padding: 10px 16px; border: none; background: transparent; color: var(--text-muted); font-family: inherit; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.nav button:hover { color: var(--text); background: var(--surface2); }
+.nav button.active { color: #fff; background: var(--accent-blue); }
+
+/* Sections */
+.section { display: none; }
+.section.active { display: block; }
+.section-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.section-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+
+/* Flow diagram */
+.flow { display: flex; align-items: center; gap: 0; margin-bottom: 32px; overflow-x: auto; padding: 16px 0; }
+.flow-step { display: flex; flex-direction: column; align-items: center; min-width: 110px; }
+.flow-circle { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.flow-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: center; max-width: 100px; }
+.flow-arrow { font-size: 20px; color: var(--text-dim); margin: 0 -4px; margin-bottom: 20px; }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+.card:hover { border-color: var(--border-hover); }
+.card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.card-title { font-size: 15px; font-weight: 700; }
+.card-body { font-size: 13px; color: var(--text-muted); }
+.card-body ul { list-style: none; padding: 0; }
+.card-body li { padding: 4px 0; position: relative; padding-left: 16px; }
+.card-body li::before { content: "›"; position: absolute; left: 0; color: var(--text-dim); font-weight: 700; }
+
+/* Module detail */
+.module-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+.module-box h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.module-box .sub { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; }
+.module-box table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.module-box th { text-align: left; padding: 8px 12px; background: var(--surface2); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+.module-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.module-box tr:last-child td { border-bottom: none; }
+
+/* Comparison table */
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 32px; }
+.cmp-table th { text-align: left; padding: 10px 12px; background: var(--surface2); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1; }
+.cmp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; background: var(--surface); }
+.cmp-table tr:hover td { background: var(--surface2); }
+
+/* Badges */
+.badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
+.badge-covered { background: rgba(16,185,129,0.15); color: var(--covered); }
+.badge-partial { background: rgba(245,158,11,0.15); color: var(--missing); }
+.badge-missing { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+.badge-oos { background: rgba(100,116,139,0.15); color: var(--out-scope); }
+.badge-advantage { background: rgba(139,92,246,0.15); color: var(--advantage); }
+.badge-cs { background: rgba(34,197,94,0.12); color: var(--clearstory); }
+.badge-ap { background: rgba(59,130,246,0.12); color: var(--appello); }
+
+/* Scorecard */
+.scorecard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 32px; }
+.score-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+.score-value { font-size: 32px; font-weight: 800; }
+.score-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+/* Priority list */
+.priority-list { counter-reset: pri; }
+.priority-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 16px 16px 56px; margin-bottom: 10px; position: relative; }
+.priority-item::before { counter-increment: pri; content: counter(pri); position: absolute; left: 16px; top: 16px; width: 28px; height: 28px; border-radius: 6px; background: var(--accent-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; }
+.priority-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.priority-item p { font-size: 12px; color: var(--text-muted); }
+.priority-item .tags { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* Footer */
+.footer { text-align: center; padding: 32px 0; font-size: 12px; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 40px; }
+
+/* Lifecycle */
+.lifecycle { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 32px; }
+.lc-step { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; position: relative; }
+.lc-step .lc-num { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.lc-step .lc-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.lc-step .lc-desc { font-size: 11px; color: var(--text-muted); }
+
+/* Tier comparison */
+.tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+.tier-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.tier-card.popular { border-color: var(--clearstory); }
+.tier-name { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.tier-price { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+.tier-features { list-style: none; font-size: 12px; color: var(--text-muted); }
+.tier-features li { padding: 4px 0; padding-left: 18px; position: relative; }
+.tier-features li::before { content: "✓"; position: absolute; left: 0; color: var(--clearstory); font-weight: 700; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 28px; }
+  .nav { flex-wrap: nowrap; }
+  .nav button { font-size: 11px; padding: 8px 10px; min-width: 80px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .tier-grid { grid-template-columns: 1fr; }
+  .scorecard { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="hero">
+  <div class="hero-badge">Competitive Intelligence &middot; March 2026</div>
+  <h1><span class="cs">Clearstory</span> vs <span class="ap">Appello UIS-20</span><br>Full Process Map</h1>
+  <p>End-to-end analysis of Clearstory's product architecture mapped against the T&amp;M Work Orders &amp; Change Order Log specs, with coverage gaps and recommended enhancements.</p>
+</div>
+
+<div class="nav" id="nav">
+  <button class="active" data-tab="overview">Overview</button>
+  <button data-tab="tm-tags">T&amp;M Tags</button>
+  <button data-tab="cor">COR Log</button>
+  <button data-tab="cn">Change Notifications</button>
+  <button data-tab="analytics">Analytics</button>
+  <button data-tab="pricing">Pricing Tiers</button>
+  <button data-tab="comparison">Coverage Matrix</button>
+  <button data-tab="recommendations">Recommendations</button>
+</div>
+
+<!-- ============ OVERVIEW ============ -->
+<div class="section active" id="overview">
+  <div class="section-title">Platform Overview</div>
+  <div class="section-sub">Clearstory is a change order communication network for commercial construction, purpose-built for the GC-to-Sub relationship. It focuses exclusively on the extra work lifecycle.</div>
+
+  <div class="lifecycle">
+    <div class="lc-step"><div class="lc-num">Phase 1</div><div class="lc-title">Field Capture</div><div class="lc-desc">Tech creates T&amp;M Tag on mobile with labor, materials, equipment, photos</div></div>
+    <div class="lc-step"><div class="lc-num">Phase 2</div><div class="lc-title">Signatures</div><div class="lc-desc">In-person or email-based signature collection with Required/Optional types</div></div>
+    <div class="lc-step"><div class="lc-num">Phase 3</div><div class="lc-title">Convert to COR</div><div class="lc-desc">One-click conversion from signed T&amp;M Tag to Change Order Request</div></div>
+    <div class="lc-step"><div class="lc-num">Phase 4</div><div class="lc-title">Review &amp; Markup</div><div class="lc-desc">GC reviews COR PDF with annotations, redlines, messaging</div></div>
+    <div class="lc-step"><div class="lc-num">Phase 5</div><div class="lc-title">Approval</div><div class="lc-desc">Status tracking: Submitted → In Review → Approved → CO Issued</div></div>
+    <div class="lc-step"><div class="lc-num">Phase 6</div><div class="lc-title">Payment</div><div class="lc-desc">Invoice generation, WIP tracking, aging reports</div></div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(34,197,94,0.15);color:var(--clearstory);">T</div>
+        <div class="card-title">T&amp;M Tags</div>
+      </div>
+      <div class="card-body"><ul>
+        <li>5-step mobile wizard (Info, Labor, Material, Equipment, Summary)</li>
+        <li>Rich text description, multi-date support, 50 attachments</li>
+        <li>PDF preview and generation with branding</li>
+        <li>Digital signatures with Required/Optional types</li>
+        <li>Sent/Received log with search, filters, export</li>
+      </ul></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(59,130,246,0.15);color:var(--accent-blue);">C</div>
+        <div class="card-title">Change Order Requests</div>
+      </div>
+      <div class="card-body"><ul>
+        <li>Create from T&amp;M conversion, manual entry, upload, or AI bulk import</li>
+        <li>Collaborative COR log shared between GC, sub, and owner</li>
+        <li>PDF review with annotations and redline tools</li>
+        <li>Version history, revision workflow, internal notes</li>
+        <li>Days aging, WIP tracking, backcharges</li>
+      </ul></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15);color:var(--accent-amber);">N</div>
+        <div class="card-title">Change Notifications</div>
+      </div>
+      <div class="card-body"><ul>
+        <li>Distribute design changes (bulletins/addendums) to subs</li>
+        <li>Track opens, downloads, responses per sub</li>
+        <li>One-click "No Cost Impact" or upload COR response</li>
+        <li>Enforce pricing deadlines, send bulk reminders</li>
+        <li>Forecast vs actual cost comparison</li>
+      </ul></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(139,92,246,0.15);color:var(--accent-purple);">A</div>
+        <div class="card-title">Analytics &amp; Settings</div>
+      </div>
+      <div class="card-body"><ul>
+        <li>COR status summary, T&amp;M status summary, labor hours breakdown</li>
+        <li>Contract summary with revised totals</li>
+        <li>Days aging buckets (30/60/90/120+)</li>
+        <li>Rate management (labor, material, equipment, markup)</li>
+        <li>Integrations: Procore, Autodesk, Viewpoint, Sage, CMiC</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ T&M TAGS ============ -->
+<div class="section" id="tm-tags">
+  <div class="section-title">T&amp;M Tag Module</div>
+  <div class="section-sub">The core field capture workflow. Replaces paper carbon-copy T&amp;M tags with a 5-step mobile wizard.</div>
+
+  <div class="flow">
+    <div class="flow-step"><div class="flow-circle" style="background:var(--clearstory);">1</div><div class="flow-label">Info &amp; Photos</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--clearstory);">2</div><div class="flow-label">Labor</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--clearstory);">3</div><div class="flow-label">Material</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--clearstory);">4</div><div class="flow-label">Equipment</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--clearstory);">5</div><div class="flow-label">Summary</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-amber);">⎙</div><div class="flow-label">Preview PDF</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-purple);">✍</div><div class="flow-label">Signatures</div></div>
+  </div>
+
+  <div class="module-box">
+    <h3>Step 1: T&amp;M Tag Info &amp; Photos</h3>
+    <div class="sub">Project selection, tag details, and file attachments — all on one screen</div>
+    <table>
+      <tr><th>Field</th><th>Required</th><th>Notes</th></tr>
+      <tr><td>Project Title</td><td>Yes</td><td>Picker with search + "Create New" inline. Projects have: title, job number, contract value, customer info, address, team members</td></tr>
+      <tr><td>Cost Code</td><td>No</td><td>Free text</td></tr>
+      <tr><td>T&amp;M Tag Title</td><td>Yes</td><td>Short title for the tag</td></tr>
+      <tr><td>Description of Work</td><td>Yes</td><td>Rich text editor: bold, italic, underline, ordered/unordered lists, indent, clear formatting</td></tr>
+      <tr><td>Dates of Work Performed</td><td>Yes</td><td>Multi-date picker with green pill chips, "+" to add, "×" to remove</td></tr>
+      <tr><td>Customer Reference Number</td><td>No</td><td>Free text</td></tr>
+      <tr><td>Photos &amp; Documents</td><td>No</td><td>0/50 limit. Camera, Photo Library, Files (JPEG, PNG, PDF). Separate Photos and Documents sections</td></tr>
+    </table>
+  </div>
+
+  <div class="module-box">
+    <h3>Step 2: Labor</h3>
+    <div class="sub">Line-item rows with pre-populated rates from project/company configuration</div>
+    <table>
+      <tr><th>Column</th><th>Required</th><th>Notes</th></tr>
+      <tr><td>Worker Name / Description</td><td>Yes</td><td>"Add Worker" picker from imported labor rates, or manual entry</td></tr>
+      <tr><td>Qty of Workers</td><td>Yes</td><td>Numeric, defaults to 1</td></tr>
+      <tr><td>Date of Work</td><td>No</td><td>Per-row date picker (for multi-day tags)</td></tr>
+      <tr><td>Straight Time (hrs)</td><td>No</td><td>Decimal hours</td></tr>
+      <tr><td>Overtime (hrs)</td><td>No</td><td>Decimal hours</td></tr>
+      <tr><td>Double Time (hrs)</td><td>No</td><td>Decimal hours</td></tr>
+      <tr><td>Premium Time (hrs)</td><td>No</td><td>Decimal hours</td></tr>
+      <tr><td>Premium OT (hrs)</td><td>No</td><td>Decimal hours (scrolls right)</td></tr>
+    </table>
+  </div>
+
+  <div class="module-box">
+    <h3>Step 3: Material &amp; Step 4: Equipment</h3>
+    <div class="sub">Same pattern: pick from project rates, add blank row, or bulk edit</div>
+    <table>
+      <tr><th>Section</th><th>Columns</th><th>Add Options</th></tr>
+      <tr><td>Materials</td><td>Material Name*, Unit of Measure*, Qty of Unit*</td><td>"Select Materials" (from project list), "Add Blank Row", "Bulk Edit" (paid only)</td></tr>
+      <tr><td>Equipment</td><td>Equipment Name*, Pieces of Equipment*, Unit of Measure</td><td>"Select Equipment" (from project list), "Add Blank Row", "Bulk Edit" (paid only)</td></tr>
+    </table>
+  </div>
+
+  <div class="module-box">
+    <h3>Step 5: Summary + Preview + Signatures</h3>
+    <div class="sub">Full read-only roll-up with PDF preview and signature collection</div>
+    <table>
+      <tr><th>Component</th><th>Details</th></tr>
+      <tr><td>Summary View</td><td>All info fields read-only + Labor/Material/Equipment/Other tables with totals</td></tr>
+      <tr><td>"Other" Category</td><td>4th line-item type: Other Name*, Qty of Other*, Unit of Measure*, Qty of Unit</td></tr>
+      <tr><td>Preview Tag</td><td>In-app PDF rendering with full layout: header, info, line items, T&amp;C, signature blocks</td></tr>
+      <tr><td>Self-Signature</td><td>Touch canvas, timestamp: "Signed by [Name] on [Date] at [Time] [TZ]"</td></tr>
+      <tr><td>Add Signer</td><td>Two modes: "Select a Signer" (search existing) or "Add a Signer" (name, email, company, type)</td></tr>
+      <tr><td>Signer Type</td><td>Radio: Optional or Required</td></tr>
+      <tr><td>Signing Order</td><td>Toggle to enforce sequential signing</td></tr>
+      <tr><td>Email Message</td><td>Custom message included in signature request email</td></tr>
+      <tr><td>Send Signed Copy</td><td>Distribution list for completed signed document</td></tr>
+    </table>
+  </div>
+
+  <div class="module-box">
+    <h3>T&amp;M Tag Statuses</h3>
+    <div class="sub">Lifecycle states for a T&amp;M Tag</div>
+    <table>
+      <tr><th>Status</th><th>Meaning</th></tr>
+      <tr><td><span class="badge badge-oos">Draft</span></td><td>Created but not submitted/signed</td></tr>
+      <tr><td><span class="badge badge-partial">Pending</span></td><td>Submitted, awaiting signature(s)</td></tr>
+      <tr><td><span class="badge badge-covered">Signed</span></td><td>All required signatures collected</td></tr>
+      <tr><td><span class="badge badge-missing">Disputed</span></td><td>Customer disputes the tag</td></tr>
+      <tr><td><span class="badge badge-oos">Void</span></td><td>Cancelled/voided</td></tr>
+      <tr><td><span class="badge badge-advantage">Converted</span></td><td>Converted to Change Order Request</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============ COR LOG ============ -->
+<div class="section" id="cor">
+  <div class="section-title">COR Log Module</div>
+  <div class="section-sub">Centralized collaborative log for pricing, reviewing, and approving Change Order Requests between GC, sub, and owner.</div>
+
+  <div class="flow">
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-amber);">+</div><div class="flow-label">Create COR</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-blue);">⊕</div><div class="flow-label">Add Line Items &amp; Markup</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-purple);">⇄</div><div class="flow-label">Submit &amp; Review</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--clearstory);">✓</div><div class="flow-label">Approve / Void</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-cyan);">$</div><div class="flow-label">Invoice &amp; Track</div></div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(245,158,11,0.15);color:var(--accent-amber);">+</div><div class="card-title">COR Creation Methods</div></div>
+      <div class="card-body"><ul>
+        <li>Convert from signed T&amp;M Tag (one-click, pre-populated)</li>
+        <li>Create manually using COR templates</li>
+        <li>Upload external COR PDF</li>
+        <li>Bulk AI Import (batch upload)</li>
+        <li>Upload on behalf of a sub-tier subcontractor</li>
+      </ul></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(59,130,246,0.15);color:var(--accent-blue);">⎙</div><div class="card-title">Review &amp; Collaboration</div></div>
+      <div class="card-body"><ul>
+        <li>PDF annotation and redline tools in-browser</li>
+        <li>Real-time messaging per COR between stakeholders</li>
+        <li>Version history with previous revision access</li>
+        <li>Internal notes (visible only to your team)</li>
+        <li>Custom markup rates per-line-item or global</li>
+      </ul></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(16,185,129,0.15);color:var(--covered);">⊞</div><div class="card-title">Log &amp; Tracking</div></div>
+      <div class="card-body"><ul>
+        <li>Collaborative real-time log (GC + sub + owner view)</li>
+        <li>Customizable columns (show/hide/reorder)</li>
+        <li>Status tracking: Submitted → In Review → Approved → CO Issued → Void</li>
+        <li>Days Aging per COR (auto-calculated)</li>
+        <li>Percent Complete / Work-in-Place tracking</li>
+        <li>Export: PDF, Excel, CSV. Shareable link.</li>
+      </ul></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(139,92,246,0.15);color:var(--accent-purple);">◈</div><div class="card-title">Advanced Features</div></div>
+      <div class="card-body"><ul>
+        <li>AI COR Reason Categories (default or custom)</li>
+        <li>Backcharge creation</li>
+        <li>Rename COR title to "Invoice"</li>
+        <li>Attach sub-tier subcontractor CORs to parent COR</li>
+        <li>Round amounts up or down</li>
+        <li>COR templates for company consistency</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHANGE NOTIFICATIONS ============ -->
+<div class="section" id="cn">
+  <div class="section-title">Change Notifications Module</div>
+  <div class="section-sub">GC-to-Sub distribution of design changes with response tracking and cost forecasting. Standard+ plans only.</div>
+
+  <div class="flow">
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-amber);">1</div><div class="flow-label">GC Creates CN</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-amber);">2</div><div class="flow-label">Attach Files</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-amber);">3</div><div class="flow-label">Select Subs</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-amber);">4</div><div class="flow-label">Set Deadline</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-blue);">5</div><div class="flow-label">Distribute</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--accent-purple);">6</div><div class="flow-label">Track &amp; Remind</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-circle" style="background:var(--clearstory);">7</div><div class="flow-label">Responses In</div></div>
+  </div>
+
+  <div class="module-box">
+    <h3>Change Notification Features</h3>
+    <div class="sub">Not applicable to Appello's contractor-centric model (out of scope for UIS-20)</div>
+    <table>
+      <tr><th>Feature</th><th>Details</th><th>UIS-20 Relevance</th></tr>
+      <tr><td>CN Types</td><td>Pricing Request CN, Authorize T&amp;M Work Downstream CN</td><td><span class="badge badge-oos">Out of Scope</span></td></tr>
+      <tr><td>File Attachments</td><td>Unlimited file size (drawing packages, bulletins)</td><td><span class="badge badge-oos">Out of Scope</span></td></tr>
+      <tr><td>Tracking</td><td>See which subs opened email, downloaded files</td><td><span class="badge badge-oos">Out of Scope</span></td></tr>
+      <tr><td>Reminders</td><td>One-click bulk reminders to non-responding subs</td><td><span class="badge badge-oos">Out of Scope</span></td></tr>
+      <tr><td>Cost Forecasting</td><td>Enter estimate per sub; compare to actuals in real-time</td><td><span class="badge badge-oos">Out of Scope</span></td></tr>
+      <tr><td>Sub Response</td><td>"No Cost Impact" (1-click) or upload/create COR</td><td><span class="badge badge-oos">Out of Scope</span></td></tr>
+      <tr><td>Audit Trail</td><td>Activity feed with complete access/change history</td><td><span class="badge badge-oos">Out of Scope</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============ ANALYTICS ============ -->
+<div class="section" id="analytics">
+  <div class="section-title">Analytics &amp; Reporting</div>
+  <div class="section-sub">Portfolio-level dashboards with project filtering. Standard+ plans only.</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(59,130,246,0.15);color:var(--accent-blue);">◉</div><div class="card-title">COR Status Summary</div></div>
+      <div class="card-body">Change orders by status: Submitted, In Review, Approved to Proceed, Voided. Filterable by customer, region, project.<br><br><span class="badge badge-covered">Covered</span> by WO-6 Change Order Log</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(34,197,94,0.15);color:var(--clearstory);">◉</div><div class="card-title">T&amp;M Status Summary</div></div>
+      <div class="card-body">Tags by status across all projects. Portfolio-wide view of field capture activity.<br><br><span class="badge badge-covered">Covered</span> by WO-5 T&amp;M Work Order Log</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(245,158,11,0.15);color:var(--accent-amber);">◉</div><div class="card-title">Labor Hours Summary</div></div>
+      <div class="card-body">Breakdown by hour type: Straight Time, Overtime, Double Time, Premium. Cross-project aggregation.<br><br><span class="badge badge-covered">Covered</span> by WO-5 Labor Hours Matrix</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(139,92,246,0.15);color:var(--accent-purple);">◉</div><div class="card-title">Contract Summary</div></div>
+      <div class="card-body">Original contract value + impact of sent CORs = revised total. Real-time recalculation.<br><br><span class="badge badge-covered">Covered</span> by WO-6 ContractSummary type</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(239,68,68,0.15);color:var(--accent-red);">◉</div><div class="card-title">Days Aging Report</div></div>
+      <div class="card-body">Pending CORs grouped by aging buckets: 30, 60, 90, 120+ days. Identifies cash flow bottlenecks.<br><br><span class="badge badge-covered">Covered</span> by WO-6 statusChangedAt + avgDaysInReview</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(100,116,139,0.15);color:var(--text-dim);">◉</div><div class="card-title">Ball-in-Court Reporting</div></div>
+      <div class="card-body">Track who is holding up approval timelines. Historical analysis of response times.<br><br><span class="badge badge-oos">Out of Scope</span> for UIS-20 v1</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PRICING ============ -->
+<div class="section" id="pricing">
+  <div class="section-title">Clearstory Pricing Tiers</div>
+  <div class="section-sub">Three tiers: Basic (free), Standard (per-user + per-project), Professional (enterprise). Understanding what is gated helps prioritize what Appello should include in v1.</div>
+
+  <div class="tier-grid">
+    <div class="tier-card">
+      <div class="tier-name">Basic</div>
+      <div class="tier-price">Free for all stakeholders</div>
+      <ul class="tier-features">
+        <li>5 T&amp;M tags / month</li>
+        <li>5 CORs / month</li>
+        <li>Unlimited projects</li>
+        <li>COR Log</li>
+        <li>T&amp;M Log</li>
+        <li>Digital signatures</li>
+        <li>Mobile app</li>
+        <li>Photos</li>
+        <li>Invite collaborators</li>
+        <li>Rate management (per project)</li>
+        <li>Default AI COR categories</li>
+      </ul>
+    </div>
+    <div class="tier-card popular">
+      <div class="tier-name" style="color:var(--clearstory);">Standard</div>
+      <div class="tier-price">Per user + platform fee / project</div>
+      <ul class="tier-features">
+        <li>All Basic features</li>
+        <li>Unlimited T&amp;M tags</li>
+        <li>Unlimited CORs</li>
+        <li>Change Notifications</li>
+        <li>Analytics &amp; Reporting</li>
+        <li>Company-wide rate management</li>
+        <li>Unlimited T&amp;M for subs</li>
+        <li>COR Templates</li>
+        <li>Exports</li>
+        <li>Custom AI COR categories</li>
+        <li>Training</li>
+      </ul>
+    </div>
+    <div class="tier-card">
+      <div class="tier-name">Professional</div>
+      <div class="tier-price">Enterprise pricing</div>
+      <ul class="tier-features">
+        <li>All Standard features</li>
+        <li>Multiple office management</li>
+        <li>API access</li>
+        <li>Integrations (Procore, Sage, etc.)</li>
+        <li>Custom reporting</li>
+        <li>Allowances</li>
+        <li>Single Sign-On (SSO)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="module-box">
+    <h3>Appello Competitive Position</h3>
+    <div class="sub">Features Appello has that Clearstory does NOT offer at any tier</div>
+    <table>
+      <tr><th>Appello Exclusive</th><th>Why It Matters</th></tr>
+      <tr><td><span class="badge badge-advantage">Equipment/Asset Module</span></td><td>Link WOs to specific equipment with QR codes. Full asset history and troubleshooting. Clearstory has zero asset management.</td></tr>
+      <tr><td><span class="badge badge-advantage">Scheduling Integration</span></td><td>Job schedule, daily schedule, user schedule, calendar scheduling. Schedule WO follow-ups. Clearstory has no scheduling.</td></tr>
+      <tr><td><span class="badge badge-advantage">Timesheet Integration</span></td><td>WO labor flows into timesheets for payroll. Clearstory tracks hours but has no timesheet/payroll path.</td></tr>
+      <tr><td><span class="badge badge-advantage">Job Costing &amp; Financials</span></td><td>Full financial suite: budgets, SOV, progress invoicing, holdbacks, job costing reports. Clearstory only tracks COR-level amounts.</td></tr>
+      <tr><td><span class="badge badge-advantage">Custom Forms &amp; Safety</span></td><td>Form builder, mobile form submission, safety forms with geolocation. Clearstory has none.</td></tr>
+      <tr><td><span class="badge badge-advantage">Training Records</span></td><td>Worker certifications, expiry tracking, PDF export for customer packages. Not in Clearstory.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============ COMPARISON ============ -->
+<div class="section" id="comparison">
+  <div class="section-title">Coverage Matrix</div>
+  <div class="section-sub">Every Clearstory feature mapped to UIS-20 coverage status. <span class="badge badge-covered">Covered</span> <span class="badge badge-partial">Partial</span> <span class="badge badge-missing">Missing</span> <span class="badge badge-oos">Out of Scope</span> <span class="badge badge-advantage">Appello Advantage</span></div>
+
+  <div class="scorecard">
+    <div class="score-card"><div class="score-value" style="color:var(--covered);">16</div><div class="score-label">Fully Covered</div></div>
+    <div class="score-card"><div class="score-value" style="color:var(--missing);">3</div><div class="score-label">Partially Covered</div></div>
+    <div class="score-card"><div class="score-value" style="color:var(--accent-red);">7</div><div class="score-label">Missing (Add)</div></div>
+    <div class="score-card"><div class="score-value" style="color:var(--out-scope);">20</div><div class="score-label">Out of Scope</div></div>
+    <div class="score-card"><div class="score-value" style="color:var(--advantage);">6</div><div class="score-label">Appello Exclusive</div></div>
+  </div>
+
+  <table class="cmp-table">
+    <thead>
+      <tr><th>Clearstory Feature</th><th>UIS-20 Spec</th><th>Status</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--clearstory);font-size:12px;text-transform:uppercase;letter-spacing:1px;">T&amp;M Tags</td></tr>
+      <tr><td>5-step mobile wizard</td><td>WO-8</td><td><span class="badge badge-covered">Covered</span></td><td>UIS-20 has 6 steps; consider merging photos into Step 1</td></tr>
+      <tr><td>Desktop tag creation</td><td>WO-3</td><td><span class="badge badge-covered">Covered</span></td><td>Flyout form vs full-page wizard</td></tr>
+      <tr><td>T&amp;M Log (Sent view)</td><td>WO-5</td><td><span class="badge badge-covered">Covered</span></td><td>Similar list with filters and summary panels</td></tr>
+      <tr><td>T&amp;M Log (Received view)</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Requires multi-tenant GC/sub model</td></tr>
+      <tr><td>Rich text description editor</td><td>—</td><td><span class="badge badge-missing">Missing</span></td><td>Clearstory has bold/italic/lists; add to WO-3 and WO-8</td></tr>
+      <tr><td>Multi-date "Dates of Work"</td><td>WO-1</td><td><span class="badge badge-missing">Missing</span></td><td>Single dateOfWork in spec; add multi-date support</td></tr>
+      <tr><td>50 photo+doc attachments</td><td>WO-8</td><td><span class="badge badge-partial">Partial</span></td><td>UIS-20 limits to 5 photos only; increase limit + add doc support</td></tr>
+      <tr><td>PDF preview before submit</td><td>—</td><td><span class="badge badge-missing">Missing</span></td><td>High-value feature for field verification; add to WO-8</td></tr>
+      <tr><td>PDF generation &amp; branding</td><td>WO-4</td><td><span class="badge badge-partial">Partial</span></td><td>WO-4 mentions Print PDF action but no template spec</td></tr>
+      <tr><td>"Other" line-item category</td><td>—</td><td><span class="badge badge-missing">Missing</span></td><td>4th line-item type for miscellaneous items</td></tr>
+      <tr><td>Per-row dates on labor</td><td>—</td><td><span class="badge badge-missing">Missing</span></td><td>Each labor row can have its own date in Clearstory</td></tr>
+      <tr><td>Rate auto-population</td><td>WO-2</td><td><span class="badge badge-covered">Covered</span></td><td>Appello uses system-wide Trade Levels; better than per-project</td></tr>
+      <tr><td>Bulk edit line items</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Clearstory gates behind paid tier; Phase 2</td></tr>
+      <tr><td>Tag statuses (Draft→Signed→Converted)</td><td>WO-1</td><td><span class="badge badge-covered">Covered</span></td><td>UIS-20 has 7 statuses; reconcile naming</td></tr>
+      <tr><td>Customer reference number</td><td>WO-1</td><td><span class="badge badge-covered">Covered</span></td><td>Already in spec</td></tr>
+      <tr><td>Cost code assignment</td><td>WO-1</td><td><span class="badge badge-covered">Covered</span></td><td>Existing cost code system</td></tr>
+
+      <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent-purple);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Signatures</td></tr>
+      <tr><td>In-person touch signature</td><td>WO-3, WO-8</td><td><span class="badge badge-covered">Covered</span></td><td>Both have signature canvas</td></tr>
+      <tr><td>Required / Optional signer types</td><td>—</td><td><span class="badge badge-missing">Missing</span></td><td>Clearstory distinguishes signer obligation; add to spec</td></tr>
+      <tr><td>Signing order enforcement</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Nice-to-have; defer to Phase 2</td></tr>
+      <tr><td>Email-based remote signatures</td><td>—</td><td><span class="badge badge-missing">Missing</span></td><td>Clearstory sends email with signing link; significant feature</td></tr>
+      <tr><td>Signed copy distribution</td><td>—</td><td><span class="badge badge-missing">Missing</span></td><td>"Send signed copy to" email distribution list</td></tr>
+      <tr><td>Signer database (name, email, company)</td><td>—</td><td><span class="badge badge-partial">Partial</span></td><td>UIS-20 captures signer name; add email + company</td></tr>
+
+      <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent-blue);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Change Order Requests</td></tr>
+      <tr><td>T&amp;M → COR conversion</td><td>WO-7</td><td><span class="badge badge-covered">Covered</span></td><td>One-click conversion in both</td></tr>
+      <tr><td>T&amp;M → Invoice generation</td><td>WO-7</td><td><span class="badge badge-covered">Covered</span></td><td>Both support invoice creation from WO</td></tr>
+      <tr><td>COR Log with statuses</td><td>WO-6</td><td><span class="badge badge-covered">Covered</span></td><td>Both have portfolio-wide CO log</td></tr>
+      <tr><td>Days aging tracking</td><td>WO-6</td><td><span class="badge badge-covered">Covered</span></td><td>statusChangedAt + avgDaysInReview</td></tr>
+      <tr><td>Contract summary (original + revised)</td><td>WO-6</td><td><span class="badge badge-covered">Covered</span></td><td>ContractSummary GraphQL type</td></tr>
+      <tr><td>PDF annotation &amp; redline</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Browser-based PDF markup; complex feature</td></tr>
+      <tr><td>Real-time messaging per COR</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Chat-style messaging; Phase 2+</td></tr>
+      <tr><td>COR version history</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Revision tracking</td></tr>
+      <tr><td>COR templates</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Consistency templates; Phase 2</td></tr>
+      <tr><td>AI COR categories</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>AI-powered categorization</td></tr>
+      <tr><td>Percent complete / WIP</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Work-in-place tracking</td></tr>
+      <tr><td>Backcharges</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Backcharge document creation</td></tr>
+      <tr><td>Sub-tier COR nesting</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Attach sub CORs to parent</td></tr>
+      <tr><td>Shareable COR log link</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Read-only shared view</td></tr>
+      <tr><td>Bulk COR upload</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Batch import</td></tr>
+
+      <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent-amber);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Change Notifications</td></tr>
+      <tr><td>CN creation &amp; distribution</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>GC-to-sub model; not applicable</td></tr>
+      <tr><td>Response tracking (opens/downloads)</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Email analytics</td></tr>
+      <tr><td>Cost forecasting vs actuals</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Budget comparison</td></tr>
+      <tr><td>Pricing deadline enforcement</td><td>—</td><td><span class="badge badge-oos">Out of Scope</span></td><td>Deadline management</td></tr>
+
+      <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--advantage);font-size:12px;text-transform:uppercase;letter-spacing:1px;">Appello Exclusives (Not in Clearstory)</td></tr>
+      <tr><td>Equipment / Asset module with QR codes</td><td>Existing</td><td><span class="badge badge-advantage">Exclusive</span></td><td>Link WOs to specific physical assets; scan QR to create WO</td></tr>
+      <tr><td>Job &amp; daily scheduling</td><td>Existing</td><td><span class="badge badge-advantage">Exclusive</span></td><td>Schedule WO follow-ups and assign techs</td></tr>
+      <tr><td>Timesheet integration</td><td>Existing</td><td><span class="badge badge-advantage">Exclusive</span></td><td>WO labor → timesheets → payroll</td></tr>
+      <tr><td>Full financial suite (budgets, SOV, invoicing)</td><td>Existing</td><td><span class="badge badge-advantage">Exclusive</span></td><td>Job costing, progress invoicing, holdbacks</td></tr>
+      <tr><td>Custom forms &amp; safety</td><td>Existing</td><td><span class="badge badge-advantage">Exclusive</span></td><td>Form builder, mobile submission, geolocation</td></tr>
+      <tr><td>Training records &amp; certifications</td><td>Existing</td><td><span class="badge badge-advantage">Exclusive</span></td><td>Worker certs, expiry tracking, PDF packages</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ RECOMMENDATIONS ============ -->
+<div class="section" id="recommendations">
+  <div class="section-title">Priority Enhancements</div>
+  <div class="section-sub">Ranked by impact to the April 15th RR Mechanical demo and competitive positioning against Clearstory.</div>
+
+  <div class="priority-list">
+    <div class="priority-item">
+      <h4>Multi-Date "Dates of Work Performed"</h4>
+      <p>Change single dateOfWork to a multi-date array with pill chips. Service work spans multiple visits. Clearstory does this with add/remove chips.</p>
+      <div class="tags"><span class="badge badge-ap">WO-1</span> <span class="badge badge-ap">WO-3</span> <span class="badge badge-ap">WO-8</span> <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--covered);">Low Effort</span></div>
+    </div>
+    <div class="priority-item">
+      <h4>Increase Attachment Limit: 5 → 30+ (Photos &amp; Documents)</h4>
+      <p>Clearstory supports 50 files including PDFs. Our limit of 5 photos is too restrictive. Support photos, PDFs, and increase to at least 30.</p>
+      <div class="tags"><span class="badge badge-ap">WO-3</span> <span class="badge badge-ap">WO-8</span> <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--covered);">Trivial</span></div>
+    </div>
+    <div class="priority-item">
+      <h4>PDF Preview on Mobile Summary Step</h4>
+      <p>Clearstory's "Preview Tag" button lets the tech see the formatted document before collecting signatures. Critical for field verification and the April 15th demo.</p>
+      <div class="tags"><span class="badge badge-ap">WO-8</span> <span class="badge badge-ap">WO-4</span> <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--missing);">Medium Effort</span></div>
+    </div>
+    <div class="priority-item">
+      <h4>Equipment-to-Work-Order Linkage (Appello Differentiator)</h4>
+      <p>Not in Clearstory at all. Add equipmentId FK on Job + "Create WO from Equipment" flow on both desktop and mobile. QR scan → equipment detail → create WO. This is Appello's competitive moat.</p>
+      <div class="tags"><span class="badge badge-ap">WO-1</span> <span class="badge badge-ap">WO-3</span> <span class="badge badge-ap">WO-4</span> <span class="badge badge-ap">WO-8</span> <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--missing);">Medium Effort</span></div>
+    </div>
+    <div class="priority-item">
+      <h4>Rich Text Description Editor</h4>
+      <p>Clearstory has bold/italic/lists. Reuse existing rich text component from the Appello Forms system. Low effort, noticeable quality improvement.</p>
+      <div class="tags"><span class="badge badge-ap">WO-3</span> <span class="badge badge-ap">WO-8</span> <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--covered);">Low Effort</span></div>
+    </div>
+    <div class="priority-item">
+      <h4>Required/Optional Signer Types + Email Distribution</h4>
+      <p>Clearstory's signature model is more sophisticated: signer types, email-based collection, signed copy distribution. At minimum, add Required/Optional toggle and email delivery.</p>
+      <div class="tags"><span class="badge badge-ap">WO-3</span> <span class="badge badge-ap">WO-8</span> <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--missing);">Medium Effort</span></div>
+    </div>
+    <div class="priority-item">
+      <h4>"Other" / Miscellaneous Line-Item Category</h4>
+      <p>4th line-item type for items that don't fit Labor/Material/Equipment. Simple table: Name, Qty, Unit of Measure, Unit Cost. Adds flexibility.</p>
+      <div class="tags"><span class="badge badge-ap">WO-2</span> <span class="badge badge-ap">WO-3</span> <span class="badge badge-ap">WO-8</span> <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--covered);">Low Effort</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Clearstory vs Appello UIS-20 Process Map &middot; Generated March 30, 2026 &middot; Based on Clearstory product research + RR Mechanical demo insights
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.nav button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
